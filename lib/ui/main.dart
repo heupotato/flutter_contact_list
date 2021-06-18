@@ -7,7 +7,8 @@ class MyApp extends StatelessWidget{
     Widget build(BuildContext context){
       return MaterialApp(
         title: "My contact list",
-        home: ContactList(),
+        theme: ThemeData(accentColor: Colors.teal), 
+        home: ContactList(), 
       ); 
     }
 }
