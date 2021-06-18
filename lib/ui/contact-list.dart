@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_contact_list/ui/contact-detail.dart';
 
-//fake data, may remove later 
+//fake class and data
+//will remove later 
 class Contact{
     int id;
     String firstName; 
@@ -22,8 +24,9 @@ class ContactList extends StatefulWidget {
     _ContactListState createState() => _ContactListState();
 }
 
-class _ContactListState extends State<ContactList> {
-    List<Contact> contactList = List.generate(10, (_) => Contact(id: 1, firstName: "ahihi", lastName: "hehe", phoneNumber: "021")); 
+class _ContactListState extends State<ContactList> { 
+    //create some fake data and assign to contactList 
+    List<Contact> contactList = List.generate(10, (int index) => Contact(id: index, firstName: "First ", lastName: "Last", phoneNumber: "0123456789")); 
 
     @override
     void initState() {
@@ -32,14 +35,24 @@ class _ContactListState extends State<ContactList> {
     }
 
     getAllContact() async{
-        //database method get contact 
+        //use database to get contact 
+    }
+
+    manageContact(String action){
+        print(action); 
     }
 
     @override
     Widget build(BuildContext context) {
+        _pushAdd(){
+
+        }
         return Scaffold(
             appBar: AppBar(
                 title: Text("Contact List"),
+                actions: [
+                    IconButton(icon: Icon(Icons.add_circle_outline_sharp), onPressed: _pushAdd),
+                ],
             ),
             body: Container(
                 padding: EdgeInsets.all(20), 
@@ -52,6 +65,27 @@ class _ContactListState extends State<ContactList> {
                             child: ListTile(   
                                 title: Text(contactName),
                                 subtitle: Text(phone),
+                                trailing: PopupMenuButton(
+                                    itemBuilder: (context) {
+                                        return [
+                                            PopupMenuItem(
+                                                value: "edit",
+                                                child: Text("Edit"),
+                                            ), 
+                                            PopupMenuItem(
+                                                value: "delete",
+                                                child: Text("Delete"),
+                                            ),
+                                        ]; 
+                                    },
+                                    onSelected: (String value) => manageContact(value),
+                                ),
+                                onTap: () => Navigator.push(
+                                    context, 
+                                    MaterialPageRoute(
+                                        builder: (context) => ContactDetail(contact: contactList[index])
+                                        )
+                                )
                             ),
                         ); 
                     }
