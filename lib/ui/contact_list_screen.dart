@@ -1,21 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_contact_list/mockdata/mock_contact_list_data.dart';
 import 'package:flutter_contact_list/ui/contact_detail_screen.dart';
-
-//fake class and data
-//will remove later 
-class Contact{
-    int id;
-    String firstName; 
-    String lastName; 
-    String phoneNumber;
-
-    Contact({required this.id, required this.firstName, required this.lastName, required this.phoneNumber}); 
-
-    @override 
-    String toString() {
-        return("id: $id\nFirst name: $firstName\nLast name: $lastName\nTel: $phoneNumber"); 
-  }
-}
 
 class ContactList extends StatefulWidget {
     const ContactList({ Key? key }) : super(key: key);
@@ -26,7 +11,7 @@ class ContactList extends StatefulWidget {
 
 class _ContactListState extends State<ContactList> { 
     //create some fake data and assign to contactList 
-    List<Contact> contactList = List.generate(10, (int index) => Contact(id: index, firstName: "First ", lastName: "Last", phoneNumber: "0123456789")); 
+    List<Contact> contactList = MockContact.mocks(); 
 
     @override
     void initState() {
@@ -42,6 +27,16 @@ class _ContactListState extends State<ContactList> {
         print(action); 
     }
 
+    navigateDetail(int index){
+         Navigator.push(
+            context, 
+            MaterialPageRoute(
+                builder: (context) => ContactDetail(contact: contactList[index])
+                )
+        ); 
+    }
+
+    
     @override
     Widget build(BuildContext context) {
         _pushAdd(){
@@ -51,8 +46,7 @@ class _ContactListState extends State<ContactList> {
             appBar: AppBar(
                 title: Text("Contact List"),
                 actions: [
-                    IconButton(icon: Icon(Icons.add_circle_outline_sharp), onPressed: _pushAdd),
-                ],
+                    IconButton(icon: Icon(Icons.add_circle_outline_sharp), onPressed: _pushAdd) ],
             ),
             body: Container(
                 padding: EdgeInsets.all(20), 
@@ -80,12 +74,7 @@ class _ContactListState extends State<ContactList> {
                                     },
                                     onSelected: (String value) => manageContact(value),
                                 ),
-                                onTap: () => Navigator.push(
-                                    context, 
-                                    MaterialPageRoute(
-                                        builder: (context) => ContactDetail(contact: contactList[index])
-                                        )
-                                )
+                                onTap: () => navigateDetail(index)
                             ),
                         ); 
                     }
