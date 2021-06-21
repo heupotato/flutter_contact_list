@@ -36,6 +36,30 @@ class _ContactListState extends State<ContactList> {
         ); 
     }
 
+    ListTile showContactTile(String contactName, String phone, int index)
+    {
+        return 
+        ListTile(   
+        title: Text(contactName),
+        subtitle: Text(phone),
+        trailing: PopupMenuButton(
+            itemBuilder: (context) {
+                return [
+                    PopupMenuItem(
+                        value: "edit",
+                        child: Text("Edit"),
+                    ), 
+                    PopupMenuItem(
+                        value: "delete",
+                        child: Text("Delete"),
+                    ),
+                ]; 
+            },
+            onSelected: (String value) => manageContact(value),
+        ),
+        onTap: () => navigateDetail(index)
+        ); 
+    }
     
     @override
     Widget build(BuildContext context) {
@@ -56,27 +80,8 @@ class _ContactListState extends State<ContactList> {
                         String contactName = contactList[index].firstName + " " + contactList[index].lastName;
                         String phone = contactList[index].phoneNumber; 
                         return Card(
-                            child: ListTile(   
-                                title: Text(contactName),
-                                subtitle: Text(phone),
-                                trailing: PopupMenuButton(
-                                    itemBuilder: (context) {
-                                        return [
-                                            PopupMenuItem(
-                                                value: "edit",
-                                                child: Text("Edit"),
-                                            ), 
-                                            PopupMenuItem(
-                                                value: "delete",
-                                                child: Text("Delete"),
-                                            ),
-                                        ]; 
-                                    },
-                                    onSelected: (String value) => manageContact(value),
-                                ),
-                                onTap: () => navigateDetail(index)
-                            ),
-                        ); 
+                            child: showContactTile(contactName, phone, index)
+                        );
                     }
                 )
             )
