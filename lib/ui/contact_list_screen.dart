@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_contact_list/ui/contact-detail.dart';
+import 'package:flutter_contact_list/ui/contact_detail_screen.dart';
 
 //fake class and data
 //will remove later 

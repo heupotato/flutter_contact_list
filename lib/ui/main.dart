@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_contact_list/ui/contact-list.dart';
+import 'package:flutter_contact_list/ui/contact_list_screen.dart';
 void main() => runApp(MyApp()); 
 
 class MyApp extends StatelessWidget{
