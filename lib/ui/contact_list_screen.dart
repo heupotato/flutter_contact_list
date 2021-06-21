@@ -53,8 +53,8 @@ class _ContactListState extends State<ContactList> {
                 child: ListView.builder(
                     itemCount: contactList.length,
                     itemBuilder: (context, index){
-                        var contactName = contactList[index].firstName + " " + contactList[index].lastName;
-                        var phone = contactList[index].phoneNumber; 
+                        String contactName = contactList[index].firstName + " " + contactList[index].lastName;
+                        String phone = contactList[index].phoneNumber; 
                         return Card(
                             child: ListTile(   
                                 title: Text(contactName),
