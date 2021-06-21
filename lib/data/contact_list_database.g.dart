@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'contact-list-database.dart';
+part of 'contact_list_database.dart';
 
 // **************************************************************************
 // MoorGenerator

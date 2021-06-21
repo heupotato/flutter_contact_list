@@ -1,5 +1,5 @@
 import 'package:moor_flutter/moor_flutter.dart';
-part 'contact-list-database.g.dart';
+part 'contact_list_database.g.dart';
 
 class Contacts extends Table{
    IntColumn get id => integer().autoIncrement()();
