@@ -34,8 +34,6 @@ dependencies:
   path: ^1.8.0
   moor_flutter: ^4.0.0
   #UI
-  provider: ^3.0.0+1
-  flutter_slidable: ^0.5.3
 
 dev_dependencies:
   flutter_test:
