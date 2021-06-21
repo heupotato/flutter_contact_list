@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_contact_list/mockdata/mock_contact_list_data.dart';
+import 'package:flutter_contact_list/mockdata/mock_contact.dart';
 
 class ContactDetail extends StatelessWidget {
     final Contact contact; 
