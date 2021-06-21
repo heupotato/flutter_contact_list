@@ -1,5 +1,3 @@
-import 'package:flutter_contact_list/data/contact_list_database.dart';
-
 class Contact{
     int id;
     String firstName; 
