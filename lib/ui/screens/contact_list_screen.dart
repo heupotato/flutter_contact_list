@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/mockdata/mock_contact_list_data.dart';
-import 'package:flutter_contact_list/ui/contact_detail_screen.dart';
+import 'package:flutter_contact_list/ui/screens/contact_detail_screen.dart';
 
 class ContactList extends StatefulWidget {
     const ContactList({ Key? key }) : super(key: key);
