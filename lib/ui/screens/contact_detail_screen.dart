@@ -30,11 +30,9 @@ class ContactDetail extends StatelessWidget {
         ]; 
     } 
 
-    List<String> contactInfoList(Contact contactInfo){
-        String gender = contactInfo.gender == 1? "Male" : 
-                        (contactInfo.gender == 2 ? "Female" : ""); 
+    List<String> contactInfoList(Contact contactInfo){ 
         return <String> [contactInfo.firstName, contactInfo.lastName,
-                        contactInfo.address, gender, contactInfo.email];  
+                        contactInfo.address, contactInfo.gender, contactInfo.email];  
         
     }
 
