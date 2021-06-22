@@ -10,7 +10,6 @@ class ContactDetail extends StatelessWidget {
 
     ContactDetail({Key? key, required this.contact}) : super(key: key);
 
-
     @override
     Widget build(BuildContext context) {
         ///get full information of contact by id

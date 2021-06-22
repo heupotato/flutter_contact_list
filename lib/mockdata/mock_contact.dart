@@ -3,7 +3,7 @@ class Contact{
     String firstName; 
     String lastName; 
     String phoneNumber;
-    int gender; 
+    String gender; 
     String email; 
     String address; 
     Contact({required this.id, required this.firstName, required this.lastName, required this.phoneNumber, 
