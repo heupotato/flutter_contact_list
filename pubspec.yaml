@@ -81,6 +81,9 @@ flutter:
         - asset: fonts/LobsterTwo-BoldItalic.ttf
           style: italic 
           weight: 700
+    - family: Peddana
+      fonts: 
+        - asset: fonts/Peddana-Regular.ttf 
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
