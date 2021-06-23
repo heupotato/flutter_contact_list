@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/mockdata/mock_contact.dart';
 import 'package:flutter_contact_list/ui/screens/contact_detail_screen.dart';
 import 'package:flutter_contact_list/ui/screens/new_contact_screen.dart';
+import 'package:flutter_contact_list/ui/screens/update_contact_screen.dart';
 
 class ContactList extends StatefulWidget {
     const ContactList({ Key? key }) : super(key: key);
@@ -24,8 +25,13 @@ class _ContactListState extends State<ContactList> {
         //use database to get contact 
     }
 
-    manageContact(String action){
-        print(action); 
+    manageContact(String action, int index){
+        if (action == "edit"){
+            Navigator.push(context, 
+                MaterialPageRoute(
+                    builder: (context) => UpdateContact(id: index)
+            )); 
+        }
     }
 
     navigateDetail(int index){
@@ -36,6 +42,7 @@ class _ContactListState extends State<ContactList> {
                 )
         ); 
     }
+
 
     ListTile showContactTile(String contactName, String phone, int index)
     {
@@ -56,7 +63,7 @@ class _ContactListState extends State<ContactList> {
                     ),
                 ]; 
             },
-            onSelected: (String value) => manageContact(value),
+            onSelected: (String value) => manageContact(value, index),
         ),
         onTap: () => navigateDetail(index)
         ); 
