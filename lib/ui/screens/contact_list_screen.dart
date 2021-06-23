@@ -3,6 +3,7 @@ import 'package:flutter_contact_list/mockdata/mock_contact.dart';
 import 'package:flutter_contact_list/ui/screens/contact_detail_screen.dart';
 import 'package:flutter_contact_list/ui/screens/new_contact_screen.dart';
 import 'package:flutter_contact_list/ui/screens/update_contact_screen.dart';
+import 'package:flutter_contact_list/ui/widgets/delete_contact_box.dart';
 
 class ContactList extends StatefulWidget {
     const ContactList({ Key? key }) : super(key: key);
@@ -31,6 +32,9 @@ class _ContactListState extends State<ContactList> {
                 MaterialPageRoute(
                     builder: (context) => UpdateContact(id: index)
             )); 
+        }
+        else if (action == "delete"){
+            DeleteContact.showDeleteBox(index, context); 
         }
     }
 
