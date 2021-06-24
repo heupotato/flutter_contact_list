@@ -7,7 +7,7 @@ class Contact{
     String email; 
     String address; 
     Contact({required this.id, required this.firstName, required this.lastName, required this.phoneNumber, 
-            this.address = "", this.email =" ", this.gender = 0}); 
+            this.address = "", this.email ="", this.gender = 0});
 
     @override 
     String toString() {
