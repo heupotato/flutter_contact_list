@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/mockdata/mock_contact.dart';
 import 'package:flutter_contact_list/pic/assets.dart';
+import 'package:flutter_contact_list/ui/widgets/contact_header.dart';
 
 class ContactDetail extends StatelessWidget {
     final Contact contact; 
@@ -15,20 +16,7 @@ class ContactDetail extends StatelessWidget {
     ); 
 
 
-    ContactDetail({Key? key, required this.contact}) : super(key: key); 
-
-    List<Widget> appBarPic(String contactName){
-        return [Image.asset(
-                        Assets.placeholder, 
-                        fit: BoxFit.contain, 
-                        height: 200,
-                    ),
-                SizedBox(height: 20), 
-                Text(contactName, 
-                    style: TextStyle(fontFamily: 'LobsterTwo', fontStyle: FontStyle.italic, 
-                                     fontWeight: FontWeight.w500, fontSize: 35))
-        ]; 
-    } 
+    ContactDetail({Key? key, required this.contact}) : super(key: key);
 
     List<String> contactInfoList(Contact contactInfo){
         String gender = contactInfo.gender == 1? "Male" : 
@@ -110,10 +98,8 @@ class ContactDetail extends StatelessWidget {
             appBar: AppBar(
                 title: Text("Contact Detail")
             ),
-            body: Center(child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: appBarPic(contactName),
-                  )),
+            extendBodyBehindAppBar: true,
+            body: ContactHeader(contactName: contactName)
         );
     }
 }
