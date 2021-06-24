@@ -28,6 +28,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.force.activate" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
