@@ -10,8 +10,8 @@ class ContactDetail extends StatelessWidget {
     final divider = Divider(
         color: Colors.teal[900], 
         thickness: 3,
-        indent: 200,
-        endIndent: 200,
+        indent: 50,
+        endIndent: 50,
     ); 
 
 
