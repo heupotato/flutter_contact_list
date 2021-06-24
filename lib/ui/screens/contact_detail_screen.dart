@@ -10,8 +10,8 @@ class ContactDetail extends StatelessWidget {
     final divider = Divider(
         color: Colors.teal[900], 
         thickness: 3,
-        indent: 50,
-        endIndent: 50,
+        indent: 200,
+        endIndent: 200,
     ); 
 
 
@@ -53,36 +53,36 @@ class ContactDetail extends StatelessWidget {
         ]; 
     }
 
-    Row detailInfo(String title, String info){
-        return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-                Spacer(),
-                Expanded(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                            Text(title + ": ", 
-                            style: TextStyle(fontFamily: 'Peddana', fontSize: 25, fontWeight: FontWeight.w700))
-                        ]
-                    )
-                ),
-                Expanded(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                            Text(info, 
-                            style: TextStyle(fontFamily: 'Peddana', fontSize: 25))
-                    ]
-                    )
-                ),
-                Spacer()
-            ]
+    Padding detailInfo(String title, String info){
+        return Padding(
+            padding: EdgeInsets.only(left: 30, right: 30),
+            child:Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                  Expanded(
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                              Text(title + ": ",
+                              style: TextStyle(fontFamily: 'Peddana', fontSize: 25, fontWeight: FontWeight.w700))
+                          ]
+                      )
+                  ),
+                  Expanded(
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                              Text(info,
+                              style: TextStyle(fontFamily: 'Peddana', fontSize: 25))
+                      ]
+                      )
+                  ),
+              ])
         ); 
     }
 
-    List<Row> detailList(List<String> infoList){
-        List<Row> detailList = []; 
+    List<Padding> detailList(List<String> infoList){
+        List<Padding> detailList = [];
         for (int i = 0; i<infoList.length; i++)
             detailList.add(detailInfo(fields[i], infoList[i])); 
         return detailList; 
@@ -102,19 +102,18 @@ class ContactDetail extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         //get full information of contact by id 
-        Contact contactInfo = MockContact.mockContact(contact.id); 
+        Contact contactInfo = MockContact.mock(contact.id);
         String contactName = contactInfo.firstName + " " + contactInfo.lastName + contactInfo.id.toString();
         List<String> infoList = contactInfoList(contactInfo); 
         String phone = contactInfo.phoneNumber; 
         return Scaffold(
             appBar: AppBar(
-                title: Center(child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: appBarPic(contactName),
-                    )),
-                toolbarHeight: 300,
+                title: Text("Contact Detail")
             ),
-            body: bodyContactDetail(infoList, phone, context)
+            body: Center(child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: appBarPic(contactName),
+                  )),
         );
     }
 }

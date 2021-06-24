@@ -11,7 +11,7 @@ class ContactList extends StatefulWidget {
 
 class _ContactListState extends State<ContactList> { 
     //create some fake data and assign to contactList 
-    List<Contact> contactList = MockContact.mockList(); 
+    List<Contact> contactList = MockContact.mocks();
 
     @override
     void initState() {

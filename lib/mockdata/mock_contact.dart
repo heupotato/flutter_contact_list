@@ -15,8 +15,8 @@ class Contact{
   }
 }
 class MockContact{
-    static List<Contact> mockList() => 
+    static List<Contact> mocks() =>
         List.generate(10, (int index) => Contact(id: index, firstName: "First ", lastName: "Last", phoneNumber: "0123456789")); 
-    static Contact mockContact(int index) => Contact(id: index, firstName: "First ", lastName: "Last", phoneNumber: "0123456789",
+    static Contact mock(int index) => Contact(id: index, firstName: "First ", lastName: "Last", phoneNumber: "0123456789",
                                                     address: "Nowhere", email: "mail@gmail.com", gender: 1); 
 }
