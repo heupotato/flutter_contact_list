@@ -134,7 +134,7 @@ class _NewContactState extends State<NewContact> {
                                     "Submit", 
                                     style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)), 
                                 onPressed: () => {
-                                        if (!formKey.currentState!.validate()){
+                                        if (formKey.currentState?.validate() ?? false){
                                         }
                                         else{
                                             formKey.currentState!.save(),
