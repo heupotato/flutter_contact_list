@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_contact_list/services/validator.dart';
 
 class NewContact extends StatefulWidget {
     const NewContact({Key? key }) : super(key: key);
@@ -7,26 +8,39 @@ class NewContact extends StatefulWidget {
     _NewContactState createState() => _NewContactState();
 }
 
+enum Gender {male, female, others}
+
+extension GenderName on Gender{
+    String get name{
+        switch (this){
+            case Gender.male:
+                return "Male";
+            case Gender.female:
+                return "Female";
+            case Gender.others:
+                return "Others";
+        }
+    }
+}
+
 class _NewContactState extends State<NewContact> {
     late String firstName; 
     late String lastName; 
     late String phoneNumber; 
-    String gender = ""; 
+    String gender = Gender.others.name;
     late String email; 
     late String address; 
 
-    List<String> genderList = ["Male", "Female", "Others"]; 
+
+
 
     final GlobalKey<FormState> formKey = GlobalKey<FormState>(); 
 
     Widget firstNameField(){
         return TextFormField(
             decoration: InputDecoration(labelText: "First name"),
-            validator: (String ? value) {
-                if (value==null || value.isEmpty){
-                    return "First name is required"; 
-                }
-            },
+            validator: (String ? value) =>
+                Validator.isFirstName(value!),
             onSaved: (String ? value) => firstName = value!,
         ); 
     }
@@ -34,11 +48,8 @@ class _NewContactState extends State<NewContact> {
     Widget lastNameField(){
         return TextFormField(
             decoration: InputDecoration(labelText: "Last name"),
-            validator: (String ? value) {
-                if (value==null || value.isEmpty){
-                    return "Last name is required"; 
-                }
-            },
+            validator: (String ? value) =>
+                Validator.isLastname(value!),
             onSaved: (String ? value) => lastName = value!,
         ); 
     }
@@ -46,17 +57,8 @@ class _NewContactState extends State<NewContact> {
     Widget phoneNumberField(){
         return TextFormField(
             decoration: InputDecoration(labelText: "Phone Number"),
-            validator: (String ? value) {
-                if (value==null || value.isEmpty){
-                    return "Phone number is required"; 
-                }
-                try{
-                    int.parse(value); 
-                }
-                catch (err){
-                    return "Invalid phone number"; 
-                }
-            },
+            validator: (String ? value) =>
+                Validator.isPhoneNumber(value!),
             onSaved: (String ? value) => phoneNumber = value!,
         ); 
     }
@@ -64,17 +66,17 @@ class _NewContactState extends State<NewContact> {
     Widget genderField(){
         return DropdownButtonFormField(
             decoration: InputDecoration(labelText: "Gender"),
-            onChanged: (String ? newValue) => {
-                setState(() => gender = newValue!)
+            onChanged: (Gender ? newValue) => {
+                setState(() => gender = newValue!.name)
             },
 
-            value: genderList[2],
+            value: Gender.others,
             isExpanded: true,            
-            items: genderList.map((String value) {
+            items: Gender.values.map((Gender value) {
                 return DropdownMenuItem(
                     value: value,
-                    child: Text(value),
-                ); 
+                    child: Text(value.name),
+                );
             }).toList()
         ); 
     }
@@ -105,11 +107,12 @@ class _NewContactState extends State<NewContact> {
 
     void _addNewContact(){
         print("Succeeded"); 
-        print(firstName); 
+        print(gender);
     }
     @override
     Widget build(BuildContext context) {
         return Scaffold(
+            resizeToAvoidBottomInset: false,
             appBar: AppBar(title: Text("Create new contact")),
             body: Container(
                 margin: EdgeInsets.all(20),
