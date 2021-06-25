@@ -22,9 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9938770a-dceb-45f2-8e61-1670fe959c57" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/lib/ui/screens/new_contact_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/new_contact_screen.dart" afterDir="false" />
-    </list>
+    <list default="true" id="9938770a-dceb-45f2-8e61-1670fe959c57" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,6 +39,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1uQ2icTnqpmuy63hqxIAh9jHsOj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
