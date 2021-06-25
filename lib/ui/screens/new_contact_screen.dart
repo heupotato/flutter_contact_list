@@ -38,8 +38,7 @@ class _NewContactScreenState extends State<NewContactScreen> {
     Widget firstNameField(){
         return TextFormField(
             decoration: InputDecoration(labelText: "First name"),
-            validator: (String ? value) =>
-                Validator.firstName(value!),
+            validator: Validator.firstName,
             onSaved: (String ? value) => firstName = value!,
         ); 
     }
@@ -47,8 +46,7 @@ class _NewContactScreenState extends State<NewContactScreen> {
     Widget lastNameField(){
         return TextFormField(
             decoration: InputDecoration(labelText: "Last name"),
-            validator: (String ? value) =>
-                Validator.lastname(value!),
+            validator: Validator.lastname,
             onSaved: (String ? value) => lastName = value!,
         ); 
     }
@@ -56,8 +54,7 @@ class _NewContactScreenState extends State<NewContactScreen> {
     Widget phoneNumberField(){
         return TextFormField(
             decoration: InputDecoration(labelText: "Phone Number"),
-            validator: (String ? value) =>
-                Validator.phoneNumber(value!),
+            validator: Validator.phoneNumber,
             onSaved: (String ? value) => phoneNumber = value!,
         ); 
     }
