@@ -8,15 +8,14 @@ class Validator{
     return (lastname == null || lastname.isEmpty)
         ? "Last name is required" : null;
   }
+  ///phone number can be written with area code
+  static final phoneRegEx = RegExp(r'^[0-9\+]+$');
 
   static String ? isPhoneNumber (String phone){
     if (phone == null || phone.isEmpty){
       return "Phone number is required";
     }
-    try{
-      int.parse(phone);
-    }
-    catch (err){
+    if (phoneRegEx.hasMatch(phone) == false){
       return "Invalid phone number";
     }
   }
