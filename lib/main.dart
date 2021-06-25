@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget{
       return MaterialApp(
         title: "My contact list",
         theme: ThemeData(primaryColor: Colors.teal[700]),
-        home: ContactList(), 
+        home: ContactListScreen(),
       ); 
     }
 }
