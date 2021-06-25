@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/services/validator.dart';
+import 'package:flutter_contact_list/ui/widgets/buttons/custom_elevated_button.dart';
 
-class NewContact extends StatefulWidget {
-    const NewContact({Key? key }) : super(key: key);
+class NewContactScreen extends StatefulWidget {
+    const NewContactScreen({Key? key }) : super(key: key);
 
     @override
-    _NewContactState createState() => _NewContactState();
+    _NewContactScreenState createState() => _NewContactScreenState();
 }
 
 enum Gender {male, female, others}
@@ -23,15 +24,13 @@ extension GenderName on Gender{
     }
 }
 
-class _NewContactState extends State<NewContact> {
+class _NewContactScreenState extends State<NewContactScreen> {
     late String firstName; 
     late String lastName; 
     late String phoneNumber; 
-    String gender = Gender.others.name;
+    Gender gender = Gender.others;
     late String email; 
     late String address; 
-
-
 
 
     final GlobalKey<FormState> formKey = GlobalKey<FormState>(); 
@@ -67,7 +66,7 @@ class _NewContactState extends State<NewContact> {
         return DropdownButtonFormField(
             decoration: InputDecoration(labelText: "Gender"),
             onChanged: (Gender ? newValue) => {
-                setState(() => gender = newValue!.name)
+                setState(() => gender = newValue!)
             },
 
             value: Gender.others,
@@ -95,7 +94,7 @@ class _NewContactState extends State<NewContact> {
         );  
     }
 
-    final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+    final ButtonStyle _raisedButtonStyle = ElevatedButton.styleFrom(
         onPrimary: Colors.teal[900],
         primary: Colors.tealAccent[700],
         minimumSize: Size(100, 40),
@@ -105,10 +104,19 @@ class _NewContactState extends State<NewContact> {
         ),
     );
 
+    _onSubmit(){
+        if (formKey.currentState?.validate() ?? false){
+            formKey.currentState!.save();
+            _addNewContact();
+            Navigator.pop(context);
+        }
+    }
+
     void _addNewContact(){
         print("Succeeded"); 
-        print(gender);
+        print(gender.name);
     }
+
     @override
     Widget build(BuildContext context) {
         return Scaffold(
@@ -128,21 +136,7 @@ class _NewContactState extends State<NewContact> {
                             emailField(), 
                             addressField(), 
                             SizedBox(height: 100), 
-                            ElevatedButton(
-                                style: raisedButtonStyle,
-                                child: Text(
-                                    "Submit", 
-                                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)), 
-                                onPressed: () => {
-                                        if (formKey.currentState?.validate() ?? false){
-                                        }
-                                        else{
-                                            formKey.currentState!.save(),
-                                            _addNewContact(), 
-                                            Navigator.pop(context)
-                                        }   
-                                }
-                            )
+                            CustomElevatedButton(title: "Submit", style: _raisedButtonStyle, onPressed: _onSubmit)
                         ],
                     ),
                 ),
