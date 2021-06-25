@@ -23,8 +23,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9938770a-dceb-45f2-8e61-1670fe959c57" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/services/validator.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ui/screens/new_contact_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/new_contact_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
