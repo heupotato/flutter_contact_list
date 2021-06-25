@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/mockdata/mock_contact.dart';
 import 'package:flutter_contact_list/ui/screens/contact_detail_screen.dart';
+import 'package:flutter_contact_list/ui/screens/new_contact_screen.dart';
 
-class ContactList extends StatefulWidget {
-    const ContactList({ Key? key }) : super(key: key);
+class ContactListScreen extends StatefulWidget {
+    const ContactListScreen({ Key? key }) : super(key: key);
 
     @override
-    _ContactListState createState() => _ContactListState();
+    _ContactListScreenState createState() => _ContactListScreenState();
 }
 
-class _ContactListState extends State<ContactList> { 
+class _ContactListScreenState extends State<ContactListScreen> {
     //create some fake data and assign to contactList 
     List<Contact> contactList = MockContact.mocks();
 
@@ -60,17 +61,21 @@ class _ContactListState extends State<ContactList> {
         onTap: () => navigateDetail(index)
         ); 
     }
+
+    _gotoAddNewContact(){
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => NewContactScreen())
+        );
+    }
     
     @override
     Widget build(BuildContext context) {
-        _pushAdd(){
-
-        }
         return Scaffold(
             appBar: AppBar(
                 title: Text("Contact List"),
                 actions: [
-                    IconButton(icon: Icon(Icons.add_circle_outline_sharp), onPressed: _pushAdd) ],
+                    IconButton(icon: Icon(Icons.add_circle_outline_sharp), onPressed: _gotoAddNewContact)],
             ),
             body: Container(
                 padding: EdgeInsets.all(20), 
