@@ -62,7 +62,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
         ); 
     }
 
-    _pushAdd(){
+    _gotoAddNewContact(){
         Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => NewContactScreen())
@@ -75,7 +75,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
             appBar: AppBar(
                 title: Text("Contact List"),
                 actions: [
-                    IconButton(icon: Icon(Icons.add_circle_outline_sharp), onPressed: _pushAdd)],
+                    IconButton(icon: Icon(Icons.add_circle_outline_sharp), onPressed: _gotoAddNewContact)],
             ),
             body: Container(
                 padding: EdgeInsets.all(20), 
