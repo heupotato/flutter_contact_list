@@ -126,7 +126,9 @@ class _UpdateContactState extends State<UpdateContact> {
             Navigator.pop(context);
         }  
     }
-    
+    String _getGender(int gender){
+        return gender == 1 ? "Male" : (gender == 2 ? "Female": "Others");
+    }
     @override
     Widget build(BuildContext context) {
         //get data of old contact by its id 
@@ -144,7 +146,7 @@ class _UpdateContactState extends State<UpdateContact> {
                             firstNameField(oldContact.firstName), 
                             lastNameField(oldContact.lastName), 
                             phoneNumberField(oldContact.phoneNumber),
-                            genderField(oldContact.gender),
+                            genderField(_getGender(oldContact.gender)),
                             emailField(oldContact.email), 
                             addressField(oldContact.address), 
                             SizedBox(height: 100), 
