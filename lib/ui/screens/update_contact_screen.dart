@@ -132,7 +132,7 @@ class _UpdateContactState extends State<UpdateContact> {
     @override
     Widget build(BuildContext context) {
         //get data of old contact by its id 
-        final oldContact = MockContact.mockContact(widget.id); 
+        final oldContact = MockContact.mock(widget.id);
 
         return Scaffold(
             appBar: AppBar(title: Text("Edit contact" )),
