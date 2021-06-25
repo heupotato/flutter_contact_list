@@ -39,7 +39,7 @@ class _NewContactScreenState extends State<NewContactScreen> {
         return TextFormField(
             decoration: InputDecoration(labelText: "First name"),
             validator: (String ? value) =>
-                Validator.isFirstName(value!),
+                Validator.firstName(value!),
             onSaved: (String ? value) => firstName = value!,
         ); 
     }
@@ -48,7 +48,7 @@ class _NewContactScreenState extends State<NewContactScreen> {
         return TextFormField(
             decoration: InputDecoration(labelText: "Last name"),
             validator: (String ? value) =>
-                Validator.isLastname(value!),
+                Validator.lastname(value!),
             onSaved: (String ? value) => lastName = value!,
         ); 
     }
@@ -57,7 +57,7 @@ class _NewContactScreenState extends State<NewContactScreen> {
         return TextFormField(
             decoration: InputDecoration(labelText: "Phone Number"),
             validator: (String ? value) =>
-                Validator.isPhoneNumber(value!),
+                Validator.phoneNumber(value!),
             onSaved: (String ? value) => phoneNumber = value!,
         ); 
     }
