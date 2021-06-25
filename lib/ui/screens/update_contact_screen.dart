@@ -1,88 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/mockdata/mock_contact.dart';
+import 'package:flutter_contact_list/services/validator.dart';
 
-class UpdateContact extends StatefulWidget {
+class UpdateContactScreen extends StatefulWidget {
   final int id; 
-  const UpdateContact({ Key? key, required this.id }) : super(key: key);
+  const UpdateContactScreen({ Key? key, required this.id }) : super(key: key);
 
 
   @override
-  _UpdateContactState createState() => _UpdateContactState();
+  _UpdateContactScreenState createState() => _UpdateContactScreenState();
 }
 
-class _UpdateContactState extends State<UpdateContact> {
+enum Gender {male, female, others}
+
+extension GenderName on Gender{
+    String get name{
+        switch (this){
+            case Gender.male:
+                return "Male";
+            case Gender.female:
+                return "Female";
+            case Gender.others:
+                return "Others";
+        }
+    }
+}
+class _UpdateContactScreenState extends State<UpdateContactScreen> {
     late String firstName; 
     late String lastName; 
     late String phoneNumber; 
-    String gender = ""; 
+    Gender gender = Gender.others;
     late String email; 
     late String address; 
 
-    List<String> genderList = ["Male", "Female", "Others"]; 
 
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>(); 
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     Widget firstNameField(String oldFirstName){
         return TextFormField(
-            decoration: InputDecoration(labelText: "First name"),
             initialValue: oldFirstName,
-            validator: (String ? value) {
-                if (value==null || value.isEmpty){
-                    return "First name is required"; 
-                }
-            },
+            decoration: InputDecoration(labelText: "First name"),
+            validator: Validator.firstName,
             onSaved: (String ? value) => firstName = value!,
-        ); 
+        );
     }
 
     Widget lastNameField(String oldLastName){
         return TextFormField(
-            decoration: InputDecoration(labelText: "Last name"),
             initialValue: oldLastName,
-            validator: (String ? value) {
-                if (value==null || value.isEmpty){
-                    return "Last name is required"; 
-                }
-            },
+            decoration: InputDecoration(labelText: "Last name"),
+            validator: Validator.lastname,
             onSaved: (String ? value) => lastName = value!,
-        ); 
+        );
     }
 
-    Widget phoneNumberField(String oldPhone){
+    Widget phoneNumberField(String oldPhoneNumber){
         return TextFormField(
+            initialValue: oldPhoneNumber,
             decoration: InputDecoration(labelText: "Phone Number"),
-            initialValue: oldPhone,
-            validator: (String ? value) {
-                if (value==null || value.isEmpty){
-                    return "Phone number is required"; 
-                }
-                try{
-                    int.parse(value); 
-                }
-                catch (err){
-                    return "Invalid phone number"; 
-                }
-            },
+            validator: Validator.phoneNumber,
             onSaved: (String ? value) => phoneNumber = value!,
-        ); 
+        );
     }
 
-    Widget genderField(String oldGender){
+    Widget genderField(Gender oldGender){
         return DropdownButtonFormField(
             decoration: InputDecoration(labelText: "Gender"),
-            onChanged: (String ? newValue) => {
+            onChanged: (Gender ? newValue) => {
                 setState(() => gender = newValue!)
             },
 
-            value: genderList[genderList.indexOf(oldGender)],
-            isExpanded: true,            
-            items: genderList.map((String value) {
+            value: oldGender,
+            isExpanded: true,
+            items: Gender.values.map((Gender value) {
                 return DropdownMenuItem(
                     value: value,
-                    child: Text(value),
-                ); 
+                    child: Text(value.name),
+                );
             }).toList()
-        ); 
+        );
     }
 
     Widget emailField(String oldEmail){
@@ -117,17 +113,15 @@ class _UpdateContactState extends State<UpdateContact> {
     }
 
     void _onSubmit(BuildContext context){
-        if (!formKey.currentState!.validate()){
-            print("Nahhhh"); 
-        }
-        else{
-            formKey.currentState!.save();
+        if (formKey.currentState?.validate() ?? false){
+            formKey.currentState?.save();
             _updateContact();
             Navigator.pop(context);
         }  
     }
-    String _getGender(int gender){
-        return gender == 1 ? "Male" : (gender == 2 ? "Female": "Others");
+    Gender _getGender(int gender){
+        return gender == 1 ? Gender.male :
+        (gender == 2 ? Gender.female : Gender.others );
     }
     @override
     Widget build(BuildContext context) {

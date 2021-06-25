@@ -29,7 +29,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
         if (action == "edit"){
             Navigator.push(context, 
                 MaterialPageRoute(
-                    builder: (context) => UpdateContact(id: index)
+                    builder: (context) => UpdateContactScreen(id: index)
             )); 
         }
     }
