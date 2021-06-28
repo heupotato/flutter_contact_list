@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_contact_list/mockdata/mock_contact.dart';
+import 'package:flutter_contact_list/data/contact_data.dart';
 import 'package:flutter_contact_list/services/validator.dart';
+import 'package:hive/hive.dart';
 
 class UpdateContactScreen extends StatefulWidget {
   final int id; 
@@ -35,6 +36,12 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
 
 
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+    Contact _contactInfo(int index){
+        Box contacts = Hive.box("contacts");
+        return contacts.getAt(index);
+    }
+
 
     Widget firstNameField(String oldFirstName){
         return TextFormField(
@@ -107,15 +114,18 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
         ),
     );
 
-    void _updateContact(){
-        print("Succeeded"); 
-        print(firstName); 
+    void _updateContact(int index){
+        Contact newContact = Contact(firstName: firstName, lastName: lastName,
+            phoneNumber: phoneNumber, gender:_setGender(gender),
+            email: email, address: address);
+        Box contacts = Hive.box("contacts");
+        contacts.putAt(index, newContact);
     }
 
     void _onSubmit(BuildContext context){
         if (formKey.currentState?.validate() ?? false){
             formKey.currentState?.save();
-            _updateContact();
+            _updateContact(widget.id);
             Navigator.pop(context);
         }  
     }
@@ -123,13 +133,19 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
         return gender == 1 ? Gender.male :
         (gender == 2 ? Gender.female : Gender.others );
     }
+
+    int _setGender(Gender gender){
+        return gender == Gender.male ? 1 :
+        (gender == Gender.female ? 2 : 0);
+    }
     @override
     Widget build(BuildContext context) {
         //get data of old contact by its id 
-        final oldContact = MockContact.mock(widget.id);
+        final oldContact = _contactInfo(widget.id);
 
         return Scaffold(
             appBar: AppBar(title: Text("Edit contact" )),
+            resizeToAvoidBottomInset: false,
             body: Container(
                 margin: EdgeInsets.all(20),
                 child: Form(
