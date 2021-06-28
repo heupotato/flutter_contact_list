@@ -4,12 +4,10 @@ import 'package:flutter_contact_list/ui/screens/contact_list_screen.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
-void main() async {
-
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   final appDocumentDirectory = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
-
   Hive.registerAdapter(ContactAdapter());
   runApp(MyApp());
 }
@@ -20,7 +18,19 @@ class MyApp extends StatelessWidget{
       return MaterialApp(
         title: "My contact list",
         theme: ThemeData(primaryColor: Colors.teal[700]),
-        home: ContactListScreen(),
+        home: FutureBuilder(
+          future: Hive.openBox("contacts"),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if(snapshot.hasError)
+                return Text(snapshot.error.toString());
+              else{
+                return ContactListScreen();
+              }
+            } else
+              return Scaffold();
+          },
+        )
       ); 
     }
 }
