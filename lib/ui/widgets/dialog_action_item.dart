@@ -13,7 +13,7 @@ class ActionDialog extends StatelessWidget {
   const ActionDialog._(this.dialogTitle, this.description, this.actions);
 
   static void show({required BuildContext context, required String dialogTitle,
-            String ? description, required List<DialogActionItem> actions}){
+    String ? description, required List<DialogActionItem> actions}){
     showDialog(
         barrierDismissible: false,
         context: context,
@@ -22,14 +22,15 @@ class ActionDialog extends StatelessWidget {
   }
 
   static void confirm({required BuildContext context, required String title,
-              String ? description, required Function onConfirm}){
+    String ? description, required Function onConfirm}){
     final DialogActionItem confirmAction =
-                        DialogActionItem(buttonTitle: title, action: onConfirm);
+    DialogActionItem(buttonTitle: title, action: onConfirm);
     final DialogActionItem cancel =
-                        DialogActionItem(buttonTitle: "Cancel", action:() {});
+    DialogActionItem(buttonTitle: "Cancel", action:() {});
     show(
         context: context,
         dialogTitle: title,
+        description: description,
         actions: [confirmAction, cancel]);
   }
 
@@ -53,11 +54,11 @@ class ActionDialog extends StatelessWidget {
         },
         child: Text(e.buttonTitle))
     ).toList();
-    
+
     return WillPopScope(
         child: AlertDialog(
           title: Text(dialogTitle),
-          content: (description != null) ? Text(description!) : null,
+          content: Text(description!),
           actions: buttons,
         ),
         onWillPop: () => Future.value(false)
