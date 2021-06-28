@@ -22,15 +22,15 @@ class _ContactListScreenState extends State<ContactListScreen> {
         //getAllContact(); 
     }
 
-    getAllContact() async{
+    _getAllContact() async{
         //use database to get contact 
     }
 
-     _deleteContact(){
+    _deleteContact(){
         print("Delete");
     }
 
-    manageContact(String action, int index){
+    _manageContact(String action, int index){
         if (action == "edit"){
             Navigator.push(context, 
                 MaterialPageRoute(
@@ -47,7 +47,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
         }
     }
 
-    navigateDetail(int index){
+    _navigateDetail(int index){
          Navigator.push(
             context, 
             MaterialPageRoute(
@@ -57,7 +57,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
     }
 
 
-    ListTile showContactTile(String contactName, String phone, int index)
+    ListTile contactTile(String contactName, String phone, int index)
     {
         return 
         ListTile(   
@@ -76,9 +76,9 @@ class _ContactListScreenState extends State<ContactListScreen> {
                     ),
                 ]; 
             },
-            onSelected: (String value) => manageContact(value, index),
+            onSelected: (String value) => _manageContact(value, index),
         ),
-        onTap: () => navigateDetail(index)
+        onTap: () => _navigateDetail(index)
         ); 
     }
 
@@ -105,7 +105,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
                         String contactName = contactList[index].firstName + " " + contactList[index].lastName;
                         String phone = contactList[index].phoneNumber; 
                         return Card(
-                            child: showContactTile(contactName, phone, index)
+                            child: contactTile(contactName, phone, index)
                         );
                     }
                 )

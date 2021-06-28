@@ -320,7 +320,7 @@
         <entry key="moor_generator">
           <value>
             <list>
-              <option value="E:/flutter/.pub-cache/hosted/pub.dartlang.org/moor_generator-4.3.1/lib" />
+              <option value="E:/flutter/.pub-cache/hosted/pub.dartlang.org/moor_generator-4.3.2/lib" />
             </list>
           </value>
         </entry>
@@ -650,7 +650,7 @@
       <root url="file://E:/flutter/.pub-cache/hosted/pub.dartlang.org/mime-1.0.0/lib" />
       <root url="file://E:/flutter/.pub-cache/hosted/pub.dartlang.org/moor-4.3.2/lib" />
       <root url="file://E:/flutter/.pub-cache/hosted/pub.dartlang.org/moor_flutter-4.0.0/lib" />
-      <root url="file://E:/flutter/.pub-cache/hosted/pub.dartlang.org/moor_generator-4.3.1/lib" />
+      <root url="file://E:/flutter/.pub-cache/hosted/pub.dartlang.org/moor_generator-4.3.2/lib" />
       <root url="file://E:/flutter/.pub-cache/hosted/pub.dartlang.org/package_config-2.0.0/lib" />
       <root url="file://E:/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0/lib" />
       <root url="file://E:/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/lib" />
