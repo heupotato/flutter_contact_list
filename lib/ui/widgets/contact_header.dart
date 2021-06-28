@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_contact_list/data/contact_list_database.dart';
 import 'package:flutter_contact_list/pic/assets.dart';
 
 class ContactHeader extends StatelessWidget {

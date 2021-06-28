@@ -24,6 +24,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9938770a-dceb-45f2-8e61-1670fe959c57" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/contact_list_database.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/contact_list_database.g.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ui/screens/contact_list_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/contact_list_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ui/widgets/delete_contact_box.dart" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ui/widgets/dialog_action_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/dialog_action_item.dart" afterDir="false" />
@@ -92,10 +95,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1624584361458" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1624510709998">
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1624847506006">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1624510709998" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1624847506006" />
     <state x="93" y="93" width="1350" height="638" key="AVDManager" timestamp="1624584431789">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
