@@ -3,6 +3,7 @@ import 'package:flutter_contact_list/mockdata/mock_contact.dart';
 import 'package:flutter_contact_list/ui/screens/contact_detail_screen.dart';
 import 'package:flutter_contact_list/ui/screens/new_contact_screen.dart';
 import 'package:flutter_contact_list/ui/screens/update_contact_screen.dart';
+import 'package:flutter_contact_list/ui/widgets/dialog_action_item.dart';
 
 class ContactListScreen extends StatefulWidget {
     const ContactListScreen({ Key? key }) : super(key: key);
@@ -21,20 +22,32 @@ class _ContactListScreenState extends State<ContactListScreen> {
         //getAllContact(); 
     }
 
-    getAllContact() async{
+    _getAllContact() async{
         //use database to get contact 
     }
 
-    manageContact(String action, int index){
+    _deleteContact(){
+        print("Delete");
+    }
+
+    _manageContact(String action, int index){
         if (action == "edit"){
             Navigator.push(context, 
                 MaterialPageRoute(
                     builder: (context) => UpdateContactScreen(id: index)
             )); 
         }
+        else if (action == "delete"){
+            //DeleteContact.showDeleteBox(index, context);
+            ActionDialog.confirm(
+                context: context,
+                title: "Delete",
+                description: "Do you want to delete this contact?",
+                onConfirm: _deleteContact);
+        }
     }
 
-    navigateDetail(int index){
+    _navigateDetail(int index){
          Navigator.push(
             context, 
             MaterialPageRoute(
@@ -44,7 +57,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
     }
 
 
-    ListTile showContactTile(String contactName, String phone, int index)
+    ListTile contactTile(String contactName, String phone, int index)
     {
         return 
         ListTile(   
@@ -63,9 +76,9 @@ class _ContactListScreenState extends State<ContactListScreen> {
                     ),
                 ]; 
             },
-            onSelected: (String value) => manageContact(value, index),
+            onSelected: (String value) => _manageContact(value, index),
         ),
-        onTap: () => navigateDetail(index)
+        onTap: () => _navigateDetail(index)
         ); 
     }
 
@@ -92,7 +105,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
                         String contactName = contactList[index].firstName + " " + contactList[index].lastName;
                         String phone = contactList[index].phoneNumber; 
                         return Card(
-                            child: showContactTile(contactName, phone, index)
+                            child: contactTile(contactName, phone, index)
                         );
                     }
                 )
