@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_contact_list/data/contact_data.dart';
 import 'package:flutter_contact_list/services/validator.dart';
 import 'package:flutter_contact_list/ui/widgets/buttons/custom_elevated_button.dart';
+import 'package:hive/hive.dart';
 
 class NewContactScreen extends StatefulWidget {
     const NewContactScreen({Key? key }) : super(key: key);
@@ -91,6 +93,11 @@ class _NewContactScreenState extends State<NewContactScreen> {
         );  
     }
 
+    int _setGender(Gender gender){
+        return gender == Gender.male ? 1 :
+        (gender == Gender.female ? 2 : 0);
+    }
+
     final ButtonStyle _raisedButtonStyle = ElevatedButton.styleFrom(
         onPrimary: Colors.teal[900],
         primary: Colors.tealAccent[700],
@@ -110,8 +117,11 @@ class _NewContactScreenState extends State<NewContactScreen> {
     }
 
     void _addNewContact(){
-        print("Succeeded"); 
-        print(gender.name);
+        Contact newContact = Contact(firstName: firstName, lastName: lastName,
+            phoneNumber: phoneNumber, gender:_setGender(gender),
+            email: email, address: address);
+        Box contacts = Hive.box("contacts");
+        contacts.add(newContact);
     }
 
     @override
