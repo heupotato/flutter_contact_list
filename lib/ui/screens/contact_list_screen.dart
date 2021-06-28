@@ -43,7 +43,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
                 context: context,
                 title: "Delete",
                 description: "Do you want to delete this contact?",
-                onConfirm: _deleteContact());
+                onConfirm: _deleteContact);
         }
     }
 
