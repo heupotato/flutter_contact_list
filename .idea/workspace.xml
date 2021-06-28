@@ -22,7 +22,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9938770a-dceb-45f2-8e61-1670fe959c57" name="Default Changelist" comment="" />
+    <list default="true" id="9938770a-dceb-45f2-8e61-1670fe959c57" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/ui/widgets/dialog_action_item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screens/contact_list_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/contact_list_screen.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
