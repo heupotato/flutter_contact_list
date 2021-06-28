@@ -3,7 +3,7 @@ import 'package:flutter_contact_list/mockdata/mock_contact.dart';
 import 'package:flutter_contact_list/ui/screens/contact_detail_screen.dart';
 import 'package:flutter_contact_list/ui/screens/new_contact_screen.dart';
 import 'package:flutter_contact_list/ui/screens/update_contact_screen.dart';
-import 'package:flutter_contact_list/ui/widgets/delete_contact_box.dart';
+import 'package:flutter_contact_list/ui/widgets/dialog_action_item.dart';
 
 class ContactListScreen extends StatefulWidget {
     const ContactListScreen({ Key? key }) : super(key: key);
@@ -26,6 +26,10 @@ class _ContactListScreenState extends State<ContactListScreen> {
         //use database to get contact 
     }
 
+     _deleteContact(){
+        print("Delete");
+    }
+
     manageContact(String action, int index){
         if (action == "edit"){
             Navigator.push(context, 
@@ -34,7 +38,12 @@ class _ContactListScreenState extends State<ContactListScreen> {
             )); 
         }
         else if (action == "delete"){
-            DeleteContact.showDeleteBox(index, context); 
+            //DeleteContact.showDeleteBox(index, context);
+            ActionDialog.confirm(
+                context: context,
+                title: "Delete",
+                description: "Do you want to delete this contact?",
+                onConfirm: _deleteContact());
         }
     }
 
