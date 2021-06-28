@@ -17,43 +17,43 @@ class _ContactListScreenState extends State<ContactListScreen> {
 
   @override
   void initState() {
-      super.initState();
-      //getAllContact();
+    super.initState();
+    //getAllContact();
   }
 
-  Box _allContact(){
+  Box _allContact() {
     return Hive.box("contacts");
   }
 
-   _deleteContact(){
-      print("Delete");
+  _deleteContact() {
+    print("Delete");
   }
 
-  manageContact(String action, int index){
-      if (action == "edit"){
-          Navigator.push(context,
-              MaterialPageRoute(
-                  builder: (context) => UpdateContactScreen(id: index)
+  manageContact(String action, int index) {
+    if (action == "edit") {
+      Navigator.push(context,
+          MaterialPageRoute(
+              builder: (context) => UpdateContactScreen(id: index)
           ));
-      }
-      else if (action == "delete"){
-          //DeleteContact.showDeleteBox(index, context);
-          ActionDialog.confirm(
-              context: context,
-              title: "Delete",
-              description: "Do you want to delete this contact?",
-              onConfirm: _deleteContact);
-      }
+    }
+    else if (action == "delete") {
+      //DeleteContact.showDeleteBox(index, context);
+      ActionDialog.confirm(
+          context: context,
+          title: "Delete",
+          description: "Do you want to delete this contact?",
+          onConfirm: _deleteContact);
+    }
   }
 
-  navigateDetail(int index){
-      ///will be modified after merging database to contact_list_screen
-      //  Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => ContactDetail(contact: contactList[index])
-      //         )
-      // );
+  navigateDetail(int index) {
+    ///will be modified after merging database to contact_list_screen
+    //  Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) => ContactDetail(contact: contactList[index])
+    //         )
+    // );
   }
 
 
@@ -81,11 +81,11 @@ class _ContactListScreenState extends State<ContactListScreen> {
       );
   }
 
-  _gotoAddNewContact(){
-      Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => NewContactScreen())
-      );
+  _gotoAddNewContact() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => NewContactScreen())
+    );
   }
 
   @override
@@ -100,9 +100,9 @@ class _ContactListScreenState extends State<ContactListScreen> {
         ),
         body: Container(
             padding: EdgeInsets.all(20),
-            child: WatchBoxBuilder(
-                box: _allContact(),
-                builder: (context, contactsBox) {
+            child: ValueListenableBuilder(
+                valueListenable: _allContact().listenable(),
+                builder: (context, Box contactsBox, _) {
                   return ListView.builder(
                       itemCount: contactsBox.length,
                       itemBuilder: (context, index) {
