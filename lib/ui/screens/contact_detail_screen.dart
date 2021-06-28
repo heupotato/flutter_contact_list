@@ -27,5 +27,4 @@ class ContactDetailScreen extends StatelessWidget {
             )
             )
         );
-    }
 }
