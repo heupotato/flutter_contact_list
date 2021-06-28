@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_contact_list/mockdata/mock_contact.dart';
+import 'package:flutter_contact_list/data/contact_data.dart';
 
 class Detail extends StatelessWidget {
   final Contact contactInfo;
@@ -15,10 +15,9 @@ class Detail extends StatelessWidget {
 
   List<String> contactInfoList(Contact contactInfo){
     String gender = contactInfo.gender == 1? "Male" :
-    (contactInfo.gender == 2 ? "Female" : "");
+    (contactInfo.gender == 2 ? "Female" : "Others");
     return <String> [contactInfo.firstName, contactInfo.lastName,
       contactInfo.address, gender, contactInfo.email];
-
   }
 
   Text titleInfo(String title){
