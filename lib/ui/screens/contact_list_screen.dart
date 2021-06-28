@@ -29,11 +29,11 @@ class _ContactListScreenState extends State<ContactListScreen> {
     print("Delete");
   }
 
-  manageContact(String action, int index) {
-    if (action == "edit") {
-      Navigator.push(context,
-          MaterialPageRoute(
-              builder: (context) => UpdateContactScreen(id: index)
+  _manageContact(String action, int index){
+      if (action == "edit"){
+          Navigator.push(context,
+              MaterialPageRoute(
+                  builder: (context) => UpdateContactScreen(id: index)
           ));
     }
     else if (action == "delete") {
@@ -46,14 +46,13 @@ class _ContactListScreenState extends State<ContactListScreen> {
     }
   }
 
-  navigateDetail(int index) {
-    ///will be modified after merging database to contact_list_screen
-    //  Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //         builder: (context) => ContactDetail(contact: contactList[index])
-    //         )
-    // );
+  _navigateDetail(int index){
+       Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ContactDetail(index: index,)
+              )
+      );
   }
 
 
@@ -75,9 +74,9 @@ class _ContactListScreenState extends State<ContactListScreen> {
                   ),
                 ];
               },
-              onSelected: (String value) {} // manageContact(value, index),
+              onSelected: (String value) => _manageContact(value, index),
           ),
-          onTap: () {} //navigateDetail(index)
+          onTap: () => _navigateDetail(index)
       );
   }
 
