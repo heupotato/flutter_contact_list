@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/data/contact_data.dart';
+import 'package:flutter_contact_list/storage/repositories/contacts_repositories.dart';
 import 'package:flutter_contact_list/ui/screens/contact_detail_screen.dart';
 import 'package:flutter_contact_list/ui/screens/new_contact_screen.dart';
 import 'package:flutter_contact_list/ui/screens/update_contact_screen.dart';
@@ -21,19 +23,15 @@ class _ContactListScreenState extends State<ContactListScreen> {
     //getAllContact();
   }
 
-  Box _allContact() {
-    return Hive.box("contacts");
-  }
-
   _deleteContact() {
     print("Delete");
   }
 
-  manageContact(String action, int index) {
-    if (action == "edit") {
-      Navigator.push(context,
-          MaterialPageRoute(
-              builder: (context) => UpdateContactScreen(id: index)
+  _manageContact(String action, int index){
+      if (action == "edit"){
+          Navigator.push(context,
+              MaterialPageRoute(
+                  builder: (context) => UpdateContactScreen(id: index)
           ));
     }
     else if (action == "delete") {
@@ -46,14 +44,16 @@ class _ContactListScreenState extends State<ContactListScreen> {
     }
   }
 
-  navigateDetail(int index) {
-    ///will be modified after merging database to contact_list_screen
-    //  Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //         builder: (context) => ContactDetail(contact: contactList[index])
-    //         )
-    // );
+  _navigateDetail(int index){
+    Contact ? contact = ContactsRepository.getContactInfo(index);
+    if (contact != null)
+       Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => 
+                  ContactDetailScreen(contact: contact)
+              )
+      );
   }
 
 
@@ -75,9 +75,9 @@ class _ContactListScreenState extends State<ContactListScreen> {
                   ),
                 ];
               },
-              onSelected: (String value) {} // manageContact(value, index),
+              onSelected: (String value) => _manageContact(value, index),
           ),
-          onTap: () {} //navigateDetail(index)
+          onTap: () => _navigateDetail(index)
       );
   }
 
@@ -88,36 +88,56 @@ class _ContactListScreenState extends State<ContactListScreen> {
     );
   }
 
+  Widget nullBox(){
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Contact List"),
+        actions: [
+          IconButton(icon: Icon(Icons.add_circle_outline_sharp),
+              onPressed: _gotoAddNewContact)
+        ],
+      ),
+      body: Center(
+        child: Text("You haven't had any contacts yet."),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Contact List"),
-          actions: [
-            IconButton(icon: Icon(Icons.add_circle_outline_sharp),
-                onPressed: _gotoAddNewContact)
-          ],
-        ),
-        body: Container(
-            padding: EdgeInsets.all(20),
-            child: ValueListenableBuilder(
-                valueListenable: _allContact().listenable(),
-                builder: (context, Box contactsBox, _) {
-                  return ListView.builder(
-                      itemCount: contactsBox.length,
-                      itemBuilder: (context, index) {
-                        final contact = contactsBox.getAt(index) as Contact;
-                        String contactName = contact.firstName + " " +
-                            contact.lastName;
-                        String phone = contact.phoneNumber;
-                        return Card(
-                          child: contactTile(contactName, phone, index),
-                        );
-                      }
-                  );
-                }
-            )
-        )
-    );
+      return Scaffold(
+          appBar: AppBar(
+            title: Text("Contact List"),
+            actions: [
+              IconButton(icon: Icon(Icons.add_circle_outline_sharp),
+                  onPressed: _gotoAddNewContact)
+            ],
+          ),
+          body: Container(
+              padding: EdgeInsets.all(20),
+              child: ValueListenableBuilder(
+                  valueListenable: ContactsRepository.getBox().listenable(),
+                  builder: (context, Box contactsBox, _) {
+                    if (ContactsRepository.getBox().isNotEmpty)
+                      return ListView.builder(
+                          itemCount: contactsBox.length,
+                          itemBuilder: (context, index) {
+                            final Contact ? contact = ContactsRepository.getContactInfo(index);
+                            if (contact != null){
+                              String contactName = contact.firstName + " " +
+                                  contact.lastName;
+                              String phone = contact.phoneNumber;
+                              return Card(
+                                child: contactTile(contactName, phone, index),
+                              );
+                            }
+                            else return Card(child: Text("Empty Contact"));
+                          }
+                      );
+                    return nullBox();
+                  }
+              )
+          )
+      );
   }
 }

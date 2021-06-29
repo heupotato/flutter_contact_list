@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_contact_list/mockdata/mock_contact.dart';
+import 'package:flutter_contact_list/data/contact_data.dart';
 
-class Detail extends StatelessWidget {
+class ContactDetail extends StatelessWidget {
   final Contact contactInfo;
-  Detail({Key? key, required this.contactInfo}) : super(key: key);
+  ContactDetail({Key? key, required this.contactInfo}) : super(key: key);
 
   final fields = ["First name", "Last name", "Address", "Gender", "Email"];
   final divider = Divider(
@@ -15,10 +15,9 @@ class Detail extends StatelessWidget {
 
   List<String> contactInfoList(Contact contactInfo){
     String gender = contactInfo.gender == 1? "Male" :
-    (contactInfo.gender == 2 ? "Female" : "");
+    (contactInfo.gender == 2 ? "Female" : "Others");
     return <String> [contactInfo.firstName, contactInfo.lastName,
       contactInfo.address, gender, contactInfo.email];
-
   }
 
   Text titleInfo(String title){
@@ -38,26 +37,21 @@ class Detail extends StatelessWidget {
 
   Padding detailInfo(String title, String info){
     return Padding(
-        padding: EdgeInsets.only(left: 30, right: 30),
+        padding: EdgeInsets.only(left: 20, right: 20),
         child:Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              Text(title + ": ",
+                  style: TextStyle(fontFamily: 'Peddana', fontSize: 25,
+                      fontWeight: FontWeight.w700), textAlign: TextAlign.left,
+                  ),
               Expanded(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(title + ": ",
-                            style: TextStyle(fontFamily: 'Peddana', fontSize: 25, fontWeight: FontWeight.w700))
-                      ]
-                  )
-              ),
-              Expanded(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
+                  flex: 2,
+                  child:
                         Text(info,
-                            style: TextStyle(fontFamily: 'Peddana', fontSize: 25))
-                      ]
+                            style: TextStyle(fontFamily: 'Peddana', fontSize: 25),
+                            textAlign: TextAlign.right, softWrap: false,
+                            overflow: TextOverflow.ellipsis,
                   )
               ),
             ])
