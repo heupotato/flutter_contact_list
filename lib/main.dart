@@ -10,6 +10,7 @@ void main() async{
   final appDocumentDirectory = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
   Hive.registerAdapter(ContactAdapter());
+  await ContactsRepository.loadBox();
   runApp(MyApp());
 }
 
@@ -19,20 +20,8 @@ class MyApp extends StatelessWidget{
       return MaterialApp(
         title: "My contact list",
         theme: ThemeData(primaryColor: Colors.teal[700]),
-        home: FutureBuilder(
-          future: ContactsRepository.openBox(),
-          builder: (BuildContext context, AsyncSnapshot snapshot)  {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if(snapshot.hasError)
-                return Text(snapshot.error.toString());
-              else{
-                return ContactListScreen();
-              }
-            } else
-              return Scaffold();
-          },
-        )
-      ); 
+        home:  ContactListScreen()
+        );
     }
 }
 
