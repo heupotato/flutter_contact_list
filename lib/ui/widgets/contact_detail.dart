@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/data/contact_data.dart';
 
-class Detail extends StatelessWidget {
+class ContactDetail extends StatelessWidget {
   final Contact contactInfo;
-  Detail({Key? key, required this.contactInfo}) : super(key: key);
+  ContactDetail({Key? key, required this.contactInfo}) : super(key: key);
 
   final fields = ["First name", "Last name", "Address", "Gender", "Email"];
   final divider = Divider(
