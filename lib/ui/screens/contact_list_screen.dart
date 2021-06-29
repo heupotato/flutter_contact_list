@@ -17,15 +17,10 @@ class ContactListScreen extends StatefulWidget {
 
 class _ContactListScreenState extends State<ContactListScreen> {
 
-  final List<Contact> contactList = [];
   @override
   void initState() {
     super.initState();
     //getAllContact();
-  }
-
-  _getAllContacts() {
-    contactList.addAll(ContactsRepository.getAllContacts()!.toList());
   }
 
   _deleteContact() {
@@ -50,12 +45,13 @@ class _ContactListScreenState extends State<ContactListScreen> {
   }
 
   _navigateDetail(int index){
-    if (ContactsRepository.getContactInfo(index) != null)
+    Contact ? contact = ContactsRepository.getContactInfo(index);
+    if (contact != null)
        Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => 
-                  ContactDetailScreen(contact: ContactsRepository.getContactInfo(index)!)
+                  ContactDetailScreen(contact: contact)
               )
       );
   }
@@ -109,8 +105,6 @@ class _ContactListScreenState extends State<ContactListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _getAllContacts();
-    if (contactList.length !=0)
       return Scaffold(
           appBar: AppBar(
             title: Text("Contact List"),
@@ -124,22 +118,26 @@ class _ContactListScreenState extends State<ContactListScreen> {
               child: ValueListenableBuilder(
                   valueListenable: ContactsRepository.getBox().listenable(),
                   builder: (context, Box contactsBox, _) {
-                    return ListView.builder(
-                        itemCount: contactsBox.length,
-                        itemBuilder: (context, index) {
-                          final contact = contactList[index];
-                          String contactName = contact.firstName + " " +
-                              contact.lastName;
-                          String phone = contact.phoneNumber;
-                          return Card(
-                            child: contactTile(contactName, phone, index),
-                          );
-                        }
-                    );
+                    if (ContactsRepository.getBox().isNotEmpty)
+                      return ListView.builder(
+                          itemCount: contactsBox.length,
+                          itemBuilder: (context, index) {
+                            final Contact ? contact = ContactsRepository.getContactInfo(index);
+                            if (contact != null){
+                              String contactName = contact.firstName + " " +
+                                  contact.lastName;
+                              String phone = contact.phoneNumber;
+                              return Card(
+                                child: contactTile(contactName, phone, index),
+                              );
+                            }
+                            else return Card(child: Text("Empty Contact"));
+                          }
+                      );
+                    return nullBox();
                   }
               )
           )
       );
-    return nullBox();
   }
 }
