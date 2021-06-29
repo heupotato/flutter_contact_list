@@ -24,10 +24,12 @@ class ContactDetail extends StatelessWidget {
             appBar: AppBar(
                 title: Text("Contact Detail")
             ),
-            //extendBodyBehindAppBar: true,
-            body: Column(
-                children: [ContactHeader(contactName: contactName),
+            resizeToAvoidBottomInset: false,
+            body: SingleChildScrollView(
+                child: Column(
+                    children: [ContactHeader(contactName: contactName),
                             Detail(contactInfo: contactInfo,)]
+            )
             )
         );
     }
