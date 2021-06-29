@@ -50,7 +50,7 @@ class Detail extends StatelessWidget {
                   child:
                         Text(info,
                             style: TextStyle(fontFamily: 'Peddana', fontSize: 25),
-                            textAlign: TextAlign.right,softWrap: false,
+                            textAlign: TextAlign.right, softWrap: false,
                             overflow: TextOverflow.ellipsis,
                   )
               ),
