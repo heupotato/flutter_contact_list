@@ -37,26 +37,21 @@ class Detail extends StatelessWidget {
 
   Padding detailInfo(String title, String info){
     return Padding(
-        padding: EdgeInsets.only(left: 30, right: 30),
+        padding: EdgeInsets.only(left: 20, right: 20),
         child:Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              Text(title + ": ",
+                  style: TextStyle(fontFamily: 'Peddana', fontSize: 25,
+                      fontWeight: FontWeight.w700), textAlign: TextAlign.left,
+                  ),
               Expanded(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(title + ": ",
-                            style: TextStyle(fontFamily: 'Peddana', fontSize: 25, fontWeight: FontWeight.w700))
-                      ]
-                  )
-              ),
-              Expanded(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
+                  flex: 2,
+                  child:
                         Text(info,
-                            style: TextStyle(fontFamily: 'Peddana', fontSize: 25))
-                      ]
+                            style: TextStyle(fontFamily: 'Peddana', fontSize: 25),
+                            textAlign: TextAlign.right,softWrap: false,
+                            overflow: TextOverflow.ellipsis,
                   )
               ),
             ])
