@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/data/contact_data.dart';
+import 'package:flutter_contact_list/storage/repositories/contacts_repositories.dart';
 import 'package:flutter_contact_list/ui/screens/contact_detail_screen.dart';
 import 'package:flutter_contact_list/ui/screens/new_contact_screen.dart';
 import 'package:flutter_contact_list/ui/screens/update_contact_screen.dart';
@@ -15,14 +16,15 @@ class ContactListScreen extends StatefulWidget {
 
 class _ContactListScreenState extends State<ContactListScreen> {
 
+  final contactList = [];
   @override
   void initState() {
     super.initState();
     //getAllContact();
   }
 
-  Box _allContact() {
-    return Hive.box("contacts");
+  _getAllContacts() {
+    contactList.addAll(ContactsRepository.getAllContacts());
   }
 
   _deleteContact() {
@@ -89,6 +91,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _getAllContacts();
     return Scaffold(
         appBar: AppBar(
           title: Text("Contact List"),
@@ -100,12 +103,12 @@ class _ContactListScreenState extends State<ContactListScreen> {
         body: Container(
             padding: EdgeInsets.all(20),
             child: ValueListenableBuilder(
-                valueListenable: _allContact().listenable(),
+                valueListenable: ContactsRepository.getBox().listenable(),
                 builder: (context, Box contactsBox, _) {
                   return ListView.builder(
                       itemCount: contactsBox.length,
                       itemBuilder: (context, index) {
-                        final contact = contactsBox.getAt(index) as Contact;
+                        final contact = contactList[index];
                         String contactName = contact.firstName + " " +
                             contact.lastName;
                         String phone = contact.phoneNumber;
