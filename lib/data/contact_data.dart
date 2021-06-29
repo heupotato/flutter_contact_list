@@ -24,8 +24,4 @@ class Contact{
   Contact({required this.firstName, required this.lastName, required this.phoneNumber,
     this.address = "", this.email ="", this.gender = 0});
 
-  @override
-  String toString() {
-    return("First name: $firstName\nLast name: $lastName\nTel: $phoneNumber");
-  }
 }
