@@ -132,18 +132,20 @@ class _NewContactScreenState extends State<NewContactScreen> {
                 margin: EdgeInsets.all(20),
                 child: Form(
                     key: formKey,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                            firstNameField(), 
-                            lastNameField(), 
-                            phoneNumberField(),
-                            genderField(),
-                            emailField(), 
-                            addressField(), 
-                            SizedBox(height: 100), 
-                            CustomElevatedButton(title: "Submit", style: _raisedButtonStyle, onPressed: _onSubmit)
-                        ],
+                    child: SingleChildScrollView(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                firstNameField(),
+                                lastNameField(),
+                                phoneNumberField(),
+                                genderField(),
+                                emailField(),
+                                addressField(),
+                                SizedBox(height: 100),
+                                CustomElevatedButton(title: "Submit", style: _raisedButtonStyle, onPressed: _onSubmit)
+                            ],
+                        )
                     ),
                 ),
             ),

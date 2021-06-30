@@ -147,28 +147,30 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
                 margin: EdgeInsets.all(20),
                 child: Form(
                     key: formKey,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    child: SingleChildScrollView(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                            firstNameField(oldContact.firstName), 
-                            lastNameField(oldContact.lastName), 
-                            phoneNumberField(oldContact.phoneNumber),
-                            genderField(_getGender(oldContact.gender)),
-                            emailField(oldContact.email), 
-                            addressField(oldContact.address), 
-                            SizedBox(height: 100), 
-                            ElevatedButton(
-                                style: raisedButtonStyle,
-                                child: Text(
-                                    "Submit", 
-                                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)), 
-                                onPressed: () => _onSubmit(context)
-                            )
-                        ],
+                                firstNameField(oldContact.firstName),
+                                lastNameField(oldContact.lastName),
+                                phoneNumberField(oldContact.phoneNumber),
+                                genderField(_getGender(oldContact.gender)),
+                                emailField(oldContact.email),
+                                addressField(oldContact.address),
+                                SizedBox(height: 100),
+                                ElevatedButton(
+                                    style: raisedButtonStyle,
+                                    child: Text(
+                                        "Submit",
+                                        style: TextStyle(color: Colors.white,
+                                            fontSize: 16, fontWeight: FontWeight.bold)),
+                                    onPressed: () => _onSubmit(context)
+                                )
+                            ],
+                        ),
                     ),
                 ),
-            ),
-        );
+        ));
         return NullWidget(message: "Cannot edit cause this contact doesn't exist");
     }
 }
