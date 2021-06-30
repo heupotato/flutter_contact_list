@@ -25,8 +25,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
   }
 
    _deleteContact(int index){
-      Box contacts = Hive.box("contacts");
-      contacts.deleteAt(index);
+      ContactsRepository.deleteContact(index);
   }
 
   _manageContact(String action, int index){
