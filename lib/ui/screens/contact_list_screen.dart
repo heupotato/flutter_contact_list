@@ -6,7 +6,7 @@ import 'package:flutter_contact_list/ui/screens/contact_detail_screen.dart';
 import 'package:flutter_contact_list/ui/screens/new_contact_screen.dart';
 import 'package:flutter_contact_list/ui/screens/update_contact_screen.dart';
 import 'package:flutter_contact_list/ui/widgets/dialog_action_item.dart';
-import 'package:flutter_contact_list/ui/screens/null_screen.dart';
+import 'package:flutter_contact_list/ui/widgets/null_widget.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class ContactListScreen extends StatefulWidget {
@@ -120,8 +120,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
                             else return Card(child: Text("Empty Contact"));
                           }
                       );
-                    return NullScreen(message: "You haven't had any contacts yet",
-                        title: "Contact List");
+                    return NullWidget(message: "You haven't had any contacts yet");
                   }
               )
           )

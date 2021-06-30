@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/data/contact_data.dart';
 import 'package:flutter_contact_list/services/validator.dart';
 import 'package:flutter_contact_list/storage/repositories/contacts_repositories.dart';
-import 'package:flutter_contact_list/ui/screens/null_screen.dart';
+import 'package:flutter_contact_list/ui/widgets/null_widget.dart';
 
 class UpdateContactScreen extends StatefulWidget {
   final int id;
@@ -137,7 +137,7 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
     }
     @override
     Widget build(BuildContext context) {
-        //get data of old contact by its id 
+        //get data of old contact by its id
         final oldContact = _contactInfo(widget.id);
         if (oldContact != null)
         return Scaffold(
@@ -169,7 +169,6 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
                 ),
             ),
         );
-        return NullScreen(message: "Cannot edit cause this contact doesn't exist",
-            title: "Edit contact");
+        return NullWidget(message: "Cannot edit cause this contact doesn't exist");
     }
 }
