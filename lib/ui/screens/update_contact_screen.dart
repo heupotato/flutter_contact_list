@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/data/contact_data.dart';
 import 'package:flutter_contact_list/services/validator.dart';
-import 'package:hive/hive.dart';
+import 'package:flutter_contact_list/storage/repositories/contacts_repositories.dart';
+import 'package:flutter_contact_list/ui/screens/null_screen.dart';
 
 class UpdateContactScreen extends StatefulWidget {
-  final int id; 
+  final int id;
   const UpdateContactScreen({ Key? key, required this.id }) : super(key: key);
 
 
@@ -37,10 +38,7 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
 
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-    Contact _contactInfo(int index){
-        Box contacts = Hive.box("contacts");
-        return contacts.getAt(index);
-    }
+    Contact ? _contactInfo(int index) => ContactsRepository.getContactInfo(index);
 
 
     Widget firstNameField(String oldFirstName){
@@ -118,8 +116,7 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
         Contact newContact = Contact(firstName: firstName, lastName: lastName,
             phoneNumber: phoneNumber, gender:_setGender(gender),
             email: email, address: address);
-        Box contacts = Hive.box("contacts");
-        contacts.putAt(index, newContact);
+        ContactsRepository.updateContact(newContact, index);
     }
 
     void _onSubmit(BuildContext context){
@@ -142,7 +139,7 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
     Widget build(BuildContext context) {
         //get data of old contact by its id 
         final oldContact = _contactInfo(widget.id);
-
+        if (oldContact != null)
         return Scaffold(
             appBar: AppBar(title: Text("Edit contact" )),
             resizeToAvoidBottomInset: false,
@@ -171,6 +168,8 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
                     ),
                 ),
             ),
-        ); 
+        );
+        return NullScreen(message: "Cannot edit cause this contact doesn't exist",
+            title: "Edit contact");
     }
 }
