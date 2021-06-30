@@ -22,8 +22,8 @@ class ContactDetailScreen extends StatelessWidget {
             body: SingleChildScrollView(
                 child: Column(
                     children: [ContactHeader(contactName: contactName),
-                            ContactDetail(contactInfo: contactInfo,)]
-            )
+                        ContactDetail(contactInfo: contactInfo,)]
+                )
             )
         );
     }

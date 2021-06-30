@@ -9,4 +9,7 @@ class ContactsRepository{
   static List<Contact>? getAllContacts() => getBox().values.toList();
 
   static Contact? getContactInfo(int index) => getBox().getAt(index);
+
+  static void updateContact(Contact contact, int index)
+              => getBox().putAt(index, contact);
 }
