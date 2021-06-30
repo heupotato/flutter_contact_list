@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/data/contact_data.dart';
 import 'package:flutter_contact_list/services/validator.dart';
+import 'package:flutter_contact_list/storage/repositories/contacts_repositories.dart';
 import 'package:flutter_contact_list/ui/widgets/buttons/custom_elevated_button.dart';
 import 'package:hive/hive.dart';
 
@@ -120,8 +121,7 @@ class _NewContactScreenState extends State<NewContactScreen> {
         Contact newContact = Contact(firstName: firstName, lastName: lastName,
             phoneNumber: phoneNumber, gender:_setGender(gender),
             email: email, address: address);
-        Box contacts = Hive.box("contacts");
-        contacts.add(newContact);
+        ContactsRepository.addContact(newContact);
     }
 
     @override
