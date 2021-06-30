@@ -142,7 +142,7 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
         if (oldContact != null)
         return Scaffold(
             appBar: AppBar(title: Text("Edit contact" )),
-            resizeToAvoidBottomInset: false,
+            resizeToAvoidBottomInset: true,
             body: Container(
                 margin: EdgeInsets.all(20),
                 child: Form(

@@ -126,7 +126,7 @@ class _NewContactScreenState extends State<NewContactScreen> {
     @override
     Widget build(BuildContext context) {
         return Scaffold(
-            resizeToAvoidBottomInset: false,
+            resizeToAvoidBottomInset: true,
             appBar: AppBar(title: Text("Create new contact")),
             body: Container(
                 margin: EdgeInsets.all(20),
