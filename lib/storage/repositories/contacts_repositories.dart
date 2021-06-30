@@ -15,4 +15,7 @@ class ContactsRepository{
 
   static void addContact(Contact contact)
               => getBox().add(contact);
+              
+  static void deleteContact(int index)
+              =>getBox().deleteAt(index);
 }

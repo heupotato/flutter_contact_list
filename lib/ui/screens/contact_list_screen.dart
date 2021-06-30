@@ -24,8 +24,8 @@ class _ContactListScreenState extends State<ContactListScreen> {
     //getAllContact();
   }
 
-  _deleteContact() {
-    print("Delete");
+   _deleteContact(int index){
+      ContactsRepository.deleteContact(index);
   }
 
   _manageContact(String action, int index){
@@ -34,15 +34,16 @@ class _ContactListScreenState extends State<ContactListScreen> {
               MaterialPageRoute(
                   builder: (context) => UpdateContactScreen(id: index)
           ));
-    }
-    else if (action == "delete") {
-      //DeleteContact.showDeleteBox(index, context);
-      ActionDialog.confirm(
-          context: context,
-          title: "Delete",
-          description: "Do you want to delete this contact?",
-          onConfirm: _deleteContact);
-    }
+      }
+      else if (action == "delete"){
+          //DeleteContact.showDeleteBox(index, context);
+          ActionDialog.confirm(
+              context: context,
+              title: "Delete",
+              description: "Do you want to delete this contact?",
+              onConfirm: () => _deleteContact(index)
+          );
+      }
   }
 
   _navigateDetail(int index){
