@@ -12,4 +12,7 @@ class ContactsRepository{
 
   static void updateContact(Contact contact, int index)
               => getBox().putAt(index, contact);
+
+  static void addContact(Contact contact)
+              => getBox().add(contact);
 }
