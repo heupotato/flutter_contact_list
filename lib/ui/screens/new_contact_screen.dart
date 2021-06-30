@@ -3,7 +3,6 @@ import 'package:flutter_contact_list/data/contact_data.dart';
 import 'package:flutter_contact_list/services/validator.dart';
 import 'package:flutter_contact_list/storage/repositories/contacts_repositories.dart';
 import 'package:flutter_contact_list/ui/widgets/buttons/custom_elevated_button.dart';
-import 'package:hive/hive.dart';
 
 class NewContactScreen extends StatefulWidget {
     const NewContactScreen({Key? key }) : super(key: key);
