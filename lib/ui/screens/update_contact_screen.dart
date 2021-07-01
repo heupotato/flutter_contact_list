@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/data/contact_data.dart';
 import 'package:flutter_contact_list/services/validator.dart';
 import 'package:flutter_contact_list/storage/repositories/contacts_repositories.dart';
+import 'package:flutter_contact_list/ui/screens/contact_list_screen.dart';
+import 'package:flutter_contact_list/ui/widgets/dialog_action_item.dart';
 import 'package:flutter_contact_list/ui/widgets/null_widget.dart';
 
 class UpdateContactScreen extends StatefulWidget {
@@ -136,14 +138,33 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
         return gender == Gender.male ? 1 :
         (gender == Gender.female ? 2 : 0);
     }
+    _deleteContact() => ContactsRepository.deleteContact(widget.id);
+
+    _delete(){
+        ActionDialog.confirm(
+            context: context,
+            title: "Delete",
+            description: "Do you want to delete this contact?",
+            onConfirm: () {
+                _deleteContact();
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ContactListScreen())
+                );
+            }
+
+        );
+    }
     @override
     Widget build(BuildContext context) {
         //get data of old contact by its id
         final oldContact = _contactInfo(widget.id);
         if (oldContact != null)
         return Scaffold(
-            appBar: AppBar(title: Text("Edit contact" )),
-            resizeToAvoidBottomInset: true,
+            appBar: AppBar(
+                title: Text("Edit contact" ),
+                actions: [IconButton(onPressed: _delete, icon: Icon(Icons.delete_outline_outlined))],
+            ),
+            resizeToAvoidBottomInset: false,
             body: Container(
                 margin: EdgeInsets.all(20),
                 child: Form(
