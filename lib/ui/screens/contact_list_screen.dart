@@ -6,6 +6,7 @@ import 'package:flutter_contact_list/ui/screens/contact_detail_screen.dart';
 import 'package:flutter_contact_list/ui/screens/new_contact_screen.dart';
 import 'package:flutter_contact_list/ui/screens/update_contact_screen.dart';
 import 'package:flutter_contact_list/ui/widgets/dialog_action_item.dart';
+import 'package:flutter_contact_list/ui/widgets/icons/contact_avatar.dart';
 import 'package:flutter_contact_list/ui/widgets/null_widget.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -63,6 +64,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
     return
       ListTile(
           title: Text(contactName),
+          leading: ContactAvatar(name: contactName),
           subtitle: Text(phone),
           trailing: PopupMenuButton(
               itemBuilder: (context) {
