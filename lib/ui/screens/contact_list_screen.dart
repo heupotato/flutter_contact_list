@@ -42,7 +42,10 @@ class _ContactListScreenState extends State<ContactListScreen> {
               context: context,
               title: "Delete",
               description: "Do you want to delete this contact?",
-              onConfirm: () => _deleteContact(index)
+              onConfirm: () {
+                _deleteContact(index);
+                Navigator.of(context).pop();
+              }
           );
       }
   }
@@ -54,7 +57,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
           context,
           MaterialPageRoute(
               builder: (context) => 
-                  ContactDetailScreen(contact: contact)
+                  ContactDetailScreen(id: index)
               )
       );
   }
@@ -123,7 +126,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
                             else return Card(child: Text("Empty Contact"));
                           }
                       );
-                    return NullWidget(message: "You haven't had any contacts yet");
+                    else return NullWidget(message: "You haven't had any contacts yet");
                   }
               )
           )
