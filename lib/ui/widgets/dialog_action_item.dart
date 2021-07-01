@@ -26,7 +26,7 @@ class ActionDialog extends StatelessWidget {
     final DialogActionItem confirmAction =
     DialogActionItem(buttonTitle: title, action: onConfirm);
     final DialogActionItem cancel =
-    DialogActionItem(buttonTitle: "Cancel", action:() {});
+    DialogActionItem(buttonTitle: "Cancel", action:() => Navigator.pop(context));
     show(
         context: context,
         dialogTitle: title,
