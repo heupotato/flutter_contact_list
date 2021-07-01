@@ -303,6 +303,13 @@
             </list>
           </value>
         </entry>
+        <entry key="mdi">
+          <value>
+            <list>
+              <option value="E:/flutter/.pub-cache/hosted/pub.dartlang.org/mdi-5.0.0-nullsafety.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="meta">
           <value>
             <list>
@@ -599,6 +606,7 @@
       <root url="file://E:/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.0.1/lib" />
       <root url="file://E:/flutter/.pub-cache/hosted/pub.dartlang.org/logging-1.0.1/lib" />
       <root url="file://E:/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.10/lib" />
+      <root url="file://E:/flutter/.pub-cache/hosted/pub.dartlang.org/mdi-5.0.0-nullsafety.0/lib" />
       <root url="file://E:/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.3.0/lib" />
       <root url="file://E:/flutter/.pub-cache/hosted/pub.dartlang.org/mime-1.0.0/lib" />
       <root url="file://E:/flutter/.pub-cache/hosted/pub.dartlang.org/package_config-2.0.0/lib" />

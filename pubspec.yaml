@@ -32,6 +32,7 @@ dependencies:
   path: ^1.8.0
   hive: ^2.0.4
   hive_flutter: ^1.1.0
+  mdi: ^5.0.0-nullsafety.0
 
   #UI
 
