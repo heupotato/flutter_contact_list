@@ -11,7 +11,7 @@ class ContactAvatar extends StatelessWidget {
       radius: 20,
       backgroundColor: Colors.teal[400],
       child: Text(
-        name[0].toUpperCase(),
+        name.trim()[0].toUpperCase(),
         style: TextStyle(
           fontSize: 25,
           color: Colors.white
