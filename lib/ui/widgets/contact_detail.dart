@@ -6,11 +6,19 @@ class ContactDetail extends StatelessWidget {
   ContactDetail({Key? key, required this.contactInfo}) : super(key: key);
 
   final fields = ["First name", "Last name", "Address", "Gender", "Email"];
+  final iconFields = [
+    Icons.person_sharp,
+    Icons.person_sharp,
+    Icons.home_rounded,
+    Icons.people_alt_outlined,
+    Icons.email_outlined
+  ];
+
   final divider = Divider(
     color: Colors.teal[900],
     thickness: 3,
-    indent: 200,
-    endIndent: 200,
+    indent: 70,
+    endIndent: 70,
   );
 
   List<String> contactInfoList(Contact contactInfo){
@@ -23,7 +31,7 @@ class ContactDetail extends StatelessWidget {
   Text titleInfo(String title){
     return Text(
         title,
-        style: TextStyle(fontFamily: 'LobsterTwo', fontSize: 22)
+        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)
     );
   }
 
@@ -35,40 +43,39 @@ class ContactDetail extends StatelessWidget {
     ];
   }
 
-  Padding detailInfo(String title, String info){
-    return Padding(
-        padding: EdgeInsets.only(left: 20, right: 20),
-        child:Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(title + ": ",
-                  style: TextStyle(fontFamily: 'Peddana', fontSize: 25,
-                      fontWeight: FontWeight.w700), textAlign: TextAlign.left,
-                  ),
-              Expanded(
-                  flex: 2,
-                  child:
-                        Text(info,
-                            style: TextStyle(fontFamily: 'Peddana', fontSize: 25),
-                            textAlign: TextAlign.right, softWrap: false,
-                            overflow: TextOverflow.ellipsis,
-                  )
-              ),
-            ])
+  Text shownInfo(String info, String title){
+    if (info == "")
+      return Text(
+        "Edit to add " + title,
+        style: TextStyle(
+          fontStyle: FontStyle.italic,
+          color: Colors.grey
+        ),
+      );
+    return Text(info);
+  }
+
+  Card detailInfo(String title, String info, IconData icon){
+    return Card(
+      child: ListTile(
+        title: shownInfo(info, title),
+        subtitle: Text(title),
+        leading: Icon(icon, color: Colors.teal[400], size: 30),
+      ),
     );
   }
 
-  List<Padding> detailList(List<String> infoList){
-    List<Padding> detailList = [];
+  List<Card> detailList(List<String> infoList){
+    List<Card> detailList = [];
     for (int i = 0; i<infoList.length; i++)
-      detailList.add(detailInfo(fields[i], infoList[i]));
+      detailList.add(detailInfo(fields[i], infoList[i], iconFields[i]));
     return detailList;
   }
 
   Widget bodyContactDetail(List<String> infoList, String phone, BuildContext context){
     List<Widget> colChildren = [];
     colChildren.addAll(titleObject("Phone"));
-    colChildren.add(detailInfo("Phone Number", phone));
+    colChildren.add(detailInfo("Phone Number", phone, Icons.phone));
     colChildren.addAll(titleObject("Detail"));
     colChildren.addAll(detailList(infoList));
     return Column(
