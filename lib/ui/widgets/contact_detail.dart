@@ -57,6 +57,7 @@ class ContactDetail extends StatelessWidget {
 
   Card detailInfo(String title, String info, IconData icon){
     return Card(
+      shadowColor: Colors.black,
       child: ListTile(
         title: shownInfo(info, title),
         subtitle: Text(title),

@@ -35,11 +35,31 @@ class _NewContactScreenState extends State<NewContactScreen> {
     late String address; 
 
 
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>(); 
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+    final OutlineInputBorder outlineTextField = OutlineInputBorder(
+        borderSide: const BorderSide(
+            color: Colors.grey,
+        ),
+    );
+
+    final OutlineInputBorder focusedTextField = OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(2.0)),
+        borderSide: BorderSide(color: Colors.blue),
+    );
+
+    InputDecoration fieldDecoration(String label, IconData iconData){
+        return InputDecoration(
+            labelText: label,
+            icon: Icon(iconData, size: 30),
+            enabledBorder: outlineTextField,
+            focusedBorder: focusedTextField
+        );
+    }
 
     Widget firstNameField(){
         return TextFormField(
-            decoration: InputDecoration(labelText: "First name"),
+            decoration: fieldDecoration("First name", Icons.person_sharp),
             validator: Validator.firstName,
             onSaved: (String ? value) => firstName = value!,
         ); 
@@ -47,7 +67,7 @@ class _NewContactScreenState extends State<NewContactScreen> {
 
     Widget lastNameField(){
         return TextFormField(
-            decoration: InputDecoration(labelText: "Last name"),
+            decoration: fieldDecoration("Last name", Icons.person_sharp),
             validator: Validator.lastname,
             onSaved: (String ? value) => lastName = value!,
         ); 
@@ -55,7 +75,7 @@ class _NewContactScreenState extends State<NewContactScreen> {
 
     Widget phoneNumberField(){
         return TextFormField(
-            decoration: InputDecoration(labelText: "Phone Number"),
+            decoration: fieldDecoration("Phone number", Icons.phone),
             validator: Validator.phoneNumber,
             onSaved: (String ? value) => phoneNumber = value!,
         ); 
@@ -63,7 +83,7 @@ class _NewContactScreenState extends State<NewContactScreen> {
 
     Widget genderField(){
         return DropdownButtonFormField(
-            decoration: InputDecoration(labelText: "Gender"),
+            decoration: fieldDecoration("Gender", Icons.people_alt_outlined),
             onChanged: (Gender ? newValue) => {
                 setState(() => gender = newValue!)
             },
@@ -81,7 +101,7 @@ class _NewContactScreenState extends State<NewContactScreen> {
 
     Widget emailField(){
         return TextFormField(
-            decoration: InputDecoration(labelText: "Email"),
+            decoration: fieldDecoration("Email", Icons.email_outlined),
             validator: Validator.email,
             onSaved: (String ? value) => email = value!
         );
@@ -89,8 +109,8 @@ class _NewContactScreenState extends State<NewContactScreen> {
 
     Widget addressField(){
         return TextFormField(
-                decoration: InputDecoration(labelText: "Address"),
-                onSaved: (String ? value) => address = value!
+            decoration: fieldDecoration("Address", Icons.home_rounded),
+            onSaved: (String ? value) => address = value!
         );  
     }
 
@@ -135,15 +155,15 @@ class _NewContactScreenState extends State<NewContactScreen> {
                     key: formKey,
                     child: SingleChildScrollView(
                         child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                firstNameField(),
-                                lastNameField(),
-                                phoneNumberField(),
-                                genderField(),
-                                emailField(),
+                                firstNameField(), SizedBox(height: 20),
+                                lastNameField(), SizedBox(height: 20),
+                                phoneNumberField(), SizedBox(height: 20),
+                                genderField(), SizedBox(height: 20),
+                                emailField(), SizedBox(height: 20),
                                 addressField(),
-                                SizedBox(height: 100),
+                                SizedBox(height: 50),
                                 CustomElevatedButton(title: "Submit", style: _raisedButtonStyle, onPressed: _onSubmit)
                             ],
                         )

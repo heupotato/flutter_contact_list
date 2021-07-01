@@ -42,11 +42,30 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
 
     Contact ? _contactInfo(int index) => ContactsRepository.getContactInfo(index);
 
+    final OutlineInputBorder outlineTextField = OutlineInputBorder(
+        borderSide: const BorderSide(
+            color: Colors.grey,
+        ),
+    );
+
+    final OutlineInputBorder focusedTextField = OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(2.0)),
+        borderSide: BorderSide(color: Colors.blue),
+    );
+
+    InputDecoration fieldDecoration(String label, IconData iconData){
+        return InputDecoration(
+            labelText: label,
+            icon: Icon(iconData, size: 30),
+            enabledBorder: outlineTextField,
+            focusedBorder: focusedTextField
+        );
+    }
 
     Widget firstNameField(String oldFirstName){
         return TextFormField(
             initialValue: oldFirstName,
-            decoration: InputDecoration(labelText: "First name"),
+            decoration: fieldDecoration("First name", Icons.person_sharp),
             validator: Validator.firstName,
             onSaved: (String ? value) => firstName = value!,
         );
@@ -55,7 +74,7 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
     Widget lastNameField(String oldLastName){
         return TextFormField(
             initialValue: oldLastName,
-            decoration: InputDecoration(labelText: "Last name"),
+            decoration: fieldDecoration("Last name", Icons.person_sharp),
             validator: Validator.lastname,
             onSaved: (String ? value) => lastName = value!,
         );
@@ -64,7 +83,7 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
     Widget phoneNumberField(String oldPhoneNumber){
         return TextFormField(
             initialValue: oldPhoneNumber,
-            decoration: InputDecoration(labelText: "Phone Number"),
+            decoration: fieldDecoration("Phone number", Icons.phone),
             validator: Validator.phoneNumber,
             onSaved: (String ? value) => phoneNumber = value!,
         );
@@ -72,7 +91,7 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
 
     Widget genderField(Gender oldGender){
         return DropdownButtonFormField(
-            decoration: InputDecoration(labelText: "Gender"),
+            decoration: fieldDecoration("Gender", Icons.people_alt_outlined),
             onChanged: (Gender ? newValue) => {
                 setState(() => gender = newValue!)
             },
@@ -90,7 +109,7 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
 
     Widget emailField(String oldEmail){
         return TextFormField(
-            decoration: InputDecoration(labelText: "Email"),
+            decoration: fieldDecoration("Email", Icons.email_outlined),
             initialValue: oldEmail,
             validator: Validator.email,
             onSaved: (String ? value) => email = value!
@@ -99,9 +118,9 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
 
     Widget addressField(String oldAddress){
         return TextFormField(
-                decoration: InputDecoration(labelText: "Address"),
-                initialValue: oldAddress,
-                onSaved: (String ? value) => address = value!
+            decoration: fieldDecoration("Address", Icons.home_rounded),
+            initialValue: oldAddress,
+            onSaved: (String ? value) => address = value!
         );  
     }
 
@@ -173,13 +192,13 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                                firstNameField(oldContact.firstName),
-                                lastNameField(oldContact.lastName),
-                                phoneNumberField(oldContact.phoneNumber),
-                                genderField(_getGender(oldContact.gender)),
-                                emailField(oldContact.email),
-                                addressField(oldContact.address),
-                                SizedBox(height: 100),
+                                firstNameField(oldContact.firstName), SizedBox(height: 20),
+                                lastNameField(oldContact.lastName), SizedBox(height: 20),
+                                phoneNumberField(oldContact.phoneNumber), SizedBox(height: 20),
+                                genderField(_getGender(oldContact.gender)), SizedBox(height: 20),
+                                emailField(oldContact.email), SizedBox(height: 20),
+                                addressField(oldContact.address), SizedBox(height: 20),
+                                SizedBox(height: 50),
                                 ElevatedButton(
                                     style: raisedButtonStyle,
                                     child: Text(
