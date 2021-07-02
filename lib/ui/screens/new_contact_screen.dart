@@ -62,6 +62,7 @@ class _NewContactScreenState extends State<NewContactScreen> {
             decoration: fieldDecoration("First name", Icons.person_sharp),
             validator: Validator.firstName,
             onSaved: (String ? value) => firstName = value!,
+            textInputAction: TextInputAction.next,
         ); 
     }
 
@@ -70,6 +71,7 @@ class _NewContactScreenState extends State<NewContactScreen> {
             decoration: fieldDecoration("Last name", Icons.person_sharp),
             validator: Validator.lastname,
             onSaved: (String ? value) => lastName = value!,
+            textInputAction: TextInputAction.next,
         ); 
     }
 
@@ -78,6 +80,7 @@ class _NewContactScreenState extends State<NewContactScreen> {
             decoration: fieldDecoration("Phone number", Icons.phone),
             validator: Validator.phoneNumber,
             onSaved: (String ? value) => phoneNumber = value!,
+            textInputAction: TextInputAction.next,
         ); 
     }
 
@@ -103,14 +106,16 @@ class _NewContactScreenState extends State<NewContactScreen> {
         return TextFormField(
             decoration: fieldDecoration("Email", Icons.email_outlined),
             validator: Validator.email,
-            onSaved: (String ? value) => email = value!
+            onSaved: (String ? value) => email = value!,
+            textInputAction: TextInputAction.next
         );
     }
 
     Widget addressField(){
         return TextFormField(
             decoration: fieldDecoration("Address", Icons.home_rounded),
-            onSaved: (String ? value) => address = value!
+            onSaved: (String ? value) => address = value!,
+            textInputAction: TextInputAction.done
         );  
     }
 
@@ -144,33 +149,46 @@ class _NewContactScreenState extends State<NewContactScreen> {
         ContactsRepository.addContact(newContact);
     }
 
+    Widget textFieldWidgets(){
+        return Container(
+            margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+            child: Form(
+                key: formKey,
+                child: SingleChildScrollView(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                            SafeArea(child: SizedBox(height: 20)),
+                            firstNameField(), SizedBox(height: 20),
+                            lastNameField(), SizedBox(height: 20),
+                            phoneNumberField(), SizedBox(height: 20),
+                            genderField(), SizedBox(height: 20),
+                            emailField(), SizedBox(height: 20),
+                            addressField(),
+                            SizedBox(height: 50),
+                            CustomElevatedButton(title: "Submit", style: _raisedButtonStyle, onPressed: _onSubmit)
+                        ],
+                    )
+                ),
+            ),
+        );
+    }
+    _onTapScreen(){
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus)
+            currentFocus.unfocus();
+    }
+
     @override
     Widget build(BuildContext context) {
         return Scaffold(
             resizeToAvoidBottomInset: true,
             appBar: AppBar(title: Text("Create new contact")),
-            body: Container(
-                margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                child: Form(
-                    key: formKey,
-                    child: SingleChildScrollView(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                    SafeArea(child: SizedBox(height: 20)),
-                                    firstNameField(), SizedBox(height: 20),
-                                    lastNameField(), SizedBox(height: 20),
-                                    phoneNumberField(), SizedBox(height: 20),
-                                    genderField(), SizedBox(height: 20),
-                                    emailField(), SizedBox(height: 20),
-                                    addressField(),
-                                    SizedBox(height: 50),
-                                    CustomElevatedButton(title: "Submit", style: _raisedButtonStyle, onPressed: _onSubmit)
-                            ],
-                        )
-                    ),
-                ),
-            ),
+            body: GestureDetector(
+                onTap: _onTapScreen,
+                child: textFieldWidgets(),
+            )
         ); 
     }
 }

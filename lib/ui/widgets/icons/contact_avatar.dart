@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mdi/mdi.dart';
 
 class ContactAvatar extends StatelessWidget {
   final String name; 

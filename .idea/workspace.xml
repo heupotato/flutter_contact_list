@@ -27,11 +27,9 @@
   <component name="ChangeListManager">
     <list default="true" id="50ca852b-7e16-4247-8b6b-5f056e9ce1b9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/screens/contact_detail_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/contact_detail_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/screens/contact_list_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/contact_list_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screens/new_contact_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/new_contact_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ui/screens/update_contact_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/update_contact_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/widgets/dialog_action_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/dialog_action_item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/widgets/icons/contact_avatar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/icons/contact_avatar.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +55,6 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="true" />
-    <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="show.migrate.to.gradle.popup" value="false" />

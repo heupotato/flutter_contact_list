@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/data/contact_data.dart';
 import 'package:flutter_contact_list/services/validator.dart';
 import 'package:flutter_contact_list/storage/repositories/contacts_repositories.dart';
-import 'package:flutter_contact_list/ui/screens/contact_list_screen.dart';
 import 'package:flutter_contact_list/ui/widgets/dialog_action_item.dart';
 import 'package:flutter_contact_list/ui/widgets/null_widget.dart';
 
@@ -68,6 +67,7 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
             decoration: fieldDecoration("First name", Icons.person_sharp),
             validator: Validator.firstName,
             onSaved: (String ? value) => firstName = value!,
+            textInputAction: TextInputAction.next,
         );
     }
 
@@ -77,6 +77,7 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
             decoration: fieldDecoration("Last name", Icons.person_sharp),
             validator: Validator.lastname,
             onSaved: (String ? value) => lastName = value!,
+            textInputAction: TextInputAction.next,
         );
     }
 
@@ -86,6 +87,7 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
             decoration: fieldDecoration("Phone number", Icons.phone),
             validator: Validator.phoneNumber,
             onSaved: (String ? value) => phoneNumber = value!,
+            textInputAction: TextInputAction.next,
         );
     }
 
@@ -112,7 +114,8 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
             decoration: fieldDecoration("Email", Icons.email_outlined),
             initialValue: oldEmail,
             validator: Validator.email,
-            onSaved: (String ? value) => email = value!
+            onSaved: (String ? value) => email = value!,
+            textInputAction: TextInputAction.next,
         ); 
     }
 
@@ -120,7 +123,8 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
         return TextFormField(
             decoration: fieldDecoration("Address", Icons.home_rounded),
             initialValue: oldAddress,
-            onSaved: (String ? value) => address = value!
+            onSaved: (String ? value) => address = value!,
+            textInputAction: TextInputAction.done
         );  
     }
 
@@ -172,6 +176,45 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
 
         );
     }
+    Widget textFieldWidgets(Contact oldContact){
+        return Container(
+            margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+            child: Form(
+                key: formKey,
+                child: SingleChildScrollView(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                            SafeArea(child: SizedBox(height: 20)),
+                            firstNameField(oldContact.firstName), SizedBox(height: 20),
+                            lastNameField(oldContact.lastName), SizedBox(height: 20),
+                            phoneNumberField(oldContact.phoneNumber), SizedBox(height: 20),
+                            genderField(_getGender(oldContact.gender)), SizedBox(height: 20),
+                            emailField(oldContact.email), SizedBox(height: 20),
+                            addressField(oldContact.address), SizedBox(height: 20),
+                            SizedBox(height: 50),
+                            ElevatedButton(
+                                style: raisedButtonStyle,
+                                child: Text(
+                                    "Submit",
+                                    style: TextStyle(color: Colors.white,
+                                        fontSize: 16, fontWeight: FontWeight.bold)),
+                                onPressed: () => _onSubmit(context)
+                            )
+                        ],
+                    ),
+                ),
+            ),
+        );
+    }
+
+    _onTapScreen(){
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus)
+            currentFocus.unfocus();
+    }
+
     @override
     Widget build(BuildContext context) {
         //get data of old contact by its id
@@ -182,36 +225,12 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
                 title: Text("Edit contact" ),
                 actions: [IconButton(onPressed: _delete, icon: Icon(Icons.delete_outline_outlined))],
             ),
-            resizeToAvoidBottomInset: false,
-            body: Container(
-                margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                child: Form(
-                    key: formKey,
-                    child: SingleChildScrollView(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                                SafeArea(child: SizedBox(height: 20)),
-                                firstNameField(oldContact.firstName), SizedBox(height: 20),
-                                lastNameField(oldContact.lastName), SizedBox(height: 20),
-                                phoneNumberField(oldContact.phoneNumber), SizedBox(height: 20),
-                                genderField(_getGender(oldContact.gender)), SizedBox(height: 20),
-                                emailField(oldContact.email), SizedBox(height: 20),
-                                addressField(oldContact.address), SizedBox(height: 20),
-                                SizedBox(height: 50),
-                                ElevatedButton(
-                                    style: raisedButtonStyle,
-                                    child: Text(
-                                        "Submit",
-                                        style: TextStyle(color: Colors.white,
-                                            fontSize: 16, fontWeight: FontWeight.bold)),
-                                    onPressed: () => _onSubmit(context)
-                                )
-                            ],
-                        ),
-                    ),
-                ),
-        ));
+            resizeToAvoidBottomInset: true,
+            body: GestureDetector(
+                onTap: _onTapScreen,
+                child: textFieldWidgets(oldContact)
+            )
+        );
         return NullWidget(message: "Cannot edit cause this contact doesn't exist");
     }
 }
