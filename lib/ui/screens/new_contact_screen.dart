@@ -82,8 +82,9 @@ class _NewContactScreenState extends State<NewContactScreen> {
     Widget emailField(){
         return TextFormField(
             decoration: InputDecoration(labelText: "Email"),
+            validator: Validator.email,
             onSaved: (String ? value) => email = value!
-        ); 
+        );
     }
 
     Widget addressField(){

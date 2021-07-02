@@ -90,6 +90,7 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
         return TextFormField(
             decoration: InputDecoration(labelText: "Email"),
             initialValue: oldEmail,
+            validator: Validator.email,
             onSaved: (String ? value) => email = value!
         ); 
     }

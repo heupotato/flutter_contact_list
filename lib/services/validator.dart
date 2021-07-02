@@ -19,4 +19,15 @@ class Validator{
       return "Invalid phone number";
     }
   }
+  
+  static final emailRegEx = RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
+  
+  static String ? email (String ? email){
+    if (email == null || email.isEmpty)
+      return null;
+    print(emailRegEx);
+    if (emailRegEx.hasMatch(email) == false)
+      return "Invalid Email";
+  }
+  
 }
