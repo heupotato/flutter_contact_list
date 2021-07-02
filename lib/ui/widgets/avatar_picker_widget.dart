@@ -37,11 +37,12 @@ class _AvatarPickerState extends State<AvatarPicker> {
     final File imageFile = File(image.path);
 
     final File newImage = await imageFile.copy('$path/contactAvatar${widget.index}.png');
-    setState(() {
+    ContactsRepository.setContactAvatar(widget.index, newImage.path);
+    this.setState(() {
       _image = newImage;
       print(newImage.path);
-      ContactsRepository.setContactAvatar(widget.index, newImage.path);
     });
+    Navigator.of(context).pop();
   }
 
   _imgFromGallery() async {
@@ -54,10 +55,11 @@ class _AvatarPickerState extends State<AvatarPicker> {
     final String path = tempDir.path;
     final File imageFile = File(image.path);
     final File newImage = await imageFile.copy('$path/contactAvatar${widget.index}.png');
-    setState(() {
+    ContactsRepository.setContactAvatar(widget.index, newImage.path);
+    this.setState(() {
       _image = newImage;
-      ContactsRepository.setContactAvatar(widget.index, newImage.path);
     });
+    Navigator.of(context).pop();
   }
 
   void _showPicker (context){
