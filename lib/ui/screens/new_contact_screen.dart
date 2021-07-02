@@ -35,35 +35,58 @@ class _NewContactScreenState extends State<NewContactScreen> {
     late String address; 
 
 
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>(); 
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+    final OutlineInputBorder outlineTextField = OutlineInputBorder(
+        borderSide: const BorderSide(
+            color: Colors.grey,
+        ),
+    );
+
+    final OutlineInputBorder focusedTextField = OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(2.0)),
+        borderSide: BorderSide(color: Colors.blue),
+    );
+
+    InputDecoration fieldDecoration(String label, IconData iconData){
+        return InputDecoration(
+            labelText: label,
+            icon: Icon(iconData, size: 30),
+            enabledBorder: outlineTextField,
+            focusedBorder: focusedTextField
+        );
+    }
 
     Widget firstNameField(){
         return TextFormField(
-            decoration: InputDecoration(labelText: "First name"),
+            decoration: fieldDecoration("First name", Icons.person_sharp),
             validator: Validator.firstName,
             onSaved: (String ? value) => firstName = value!,
+            textInputAction: TextInputAction.next,
         ); 
     }
 
     Widget lastNameField(){
         return TextFormField(
-            decoration: InputDecoration(labelText: "Last name"),
+            decoration: fieldDecoration("Last name", Icons.person_sharp),
             validator: Validator.lastname,
             onSaved: (String ? value) => lastName = value!,
+            textInputAction: TextInputAction.next,
         ); 
     }
 
     Widget phoneNumberField(){
         return TextFormField(
-            decoration: InputDecoration(labelText: "Phone Number"),
+            decoration: fieldDecoration("Phone number", Icons.phone),
             validator: Validator.phoneNumber,
             onSaved: (String ? value) => phoneNumber = value!,
+            textInputAction: TextInputAction.next,
         ); 
     }
 
     Widget genderField(){
         return DropdownButtonFormField(
-            decoration: InputDecoration(labelText: "Gender"),
+            decoration: fieldDecoration("Gender", Icons.people_alt_outlined),
             onChanged: (Gender ? newValue) => {
                 setState(() => gender = newValue!)
             },
@@ -81,16 +104,18 @@ class _NewContactScreenState extends State<NewContactScreen> {
 
     Widget emailField(){
         return TextFormField(
-            decoration: InputDecoration(labelText: "Email"),
+            decoration: fieldDecoration("Email", Icons.email_outlined),
             validator: Validator.email,
-            onSaved: (String ? value) => email = value!
+            onSaved: (String ? value) => email = value!,
+            textInputAction: TextInputAction.next
         );
     }
 
     Widget addressField(){
         return TextFormField(
-                decoration: InputDecoration(labelText: "Address"),
-                onSaved: (String ? value) => address = value!
+            decoration: fieldDecoration("Address", Icons.home_rounded),
+            onSaved: (String ? value) => address = value!,
+            textInputAction: TextInputAction.done
         );  
     }
 
@@ -124,32 +149,46 @@ class _NewContactScreenState extends State<NewContactScreen> {
         ContactsRepository.addContact(newContact);
     }
 
+    Widget textFieldWidgets(){
+        return Container(
+            margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+            child: Form(
+                key: formKey,
+                child: SingleChildScrollView(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                            SafeArea(child: SizedBox(height: 20)),
+                            firstNameField(), SizedBox(height: 20),
+                            lastNameField(), SizedBox(height: 20),
+                            phoneNumberField(), SizedBox(height: 20),
+                            genderField(), SizedBox(height: 20),
+                            emailField(), SizedBox(height: 20),
+                            addressField(),
+                            SizedBox(height: 50),
+                            CustomElevatedButton(title: "Submit", style: _raisedButtonStyle, onPressed: _onSubmit)
+                        ],
+                    )
+                ),
+            ),
+        );
+    }
+    _onTapScreen(){
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus)
+            currentFocus.unfocus();
+    }
+
     @override
     Widget build(BuildContext context) {
         return Scaffold(
             resizeToAvoidBottomInset: true,
             appBar: AppBar(title: Text("Create new contact")),
-            body: Container(
-                margin: EdgeInsets.all(20),
-                child: Form(
-                    key: formKey,
-                    child: SingleChildScrollView(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                firstNameField(),
-                                lastNameField(),
-                                phoneNumberField(),
-                                genderField(),
-                                emailField(),
-                                addressField(),
-                                SizedBox(height: 100),
-                                CustomElevatedButton(title: "Submit", style: _raisedButtonStyle, onPressed: _onSubmit)
-                            ],
-                        )
-                    ),
-                ),
-            ),
+            body: GestureDetector(
+                onTap: _onTapScreen,
+                child: textFieldWidgets(),
+            )
         ); 
     }
 }

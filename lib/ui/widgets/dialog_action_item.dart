@@ -49,8 +49,8 @@ class ActionDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> buttons = actions.map((e) => TextButton(
         onPressed: (){
-          e.action();
           Navigator.pop(context);
+          e.action();
         },
         child: Text(e.buttonTitle))
     ).toList();

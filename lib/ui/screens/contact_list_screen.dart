@@ -6,6 +6,7 @@ import 'package:flutter_contact_list/ui/screens/contact_detail_screen.dart';
 import 'package:flutter_contact_list/ui/screens/new_contact_screen.dart';
 import 'package:flutter_contact_list/ui/screens/update_contact_screen.dart';
 import 'package:flutter_contact_list/ui/widgets/dialog_action_item.dart';
+import 'package:flutter_contact_list/ui/widgets/icons/contact_avatar.dart';
 import 'package:flutter_contact_list/ui/widgets/null_widget.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -25,7 +26,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
   }
 
    _deleteContact(int index){
-      ContactsRepository.deleteContact(index);
+      //ContactsRepository.deleteContact(index);
   }
 
   _manageContact(String action, int index){
@@ -41,7 +42,10 @@ class _ContactListScreenState extends State<ContactListScreen> {
               context: context,
               title: "Delete",
               description: "Do you want to delete this contact?",
-              onConfirm: () => _deleteContact(index)
+              onConfirm: () {
+                _deleteContact(index);
+                //Navigator.of(context).pop();
+              }
           );
       }
   }
@@ -53,7 +57,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
           context,
           MaterialPageRoute(
               builder: (context) => 
-                  ContactDetailScreen(contact: contact)
+                  ContactDetailScreen(id: index)
               )
       );
   }
@@ -63,6 +67,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
     return
       ListTile(
           title: Text(contactName),
+          leading: ContactAvatar(name: contactName),
           subtitle: Text(phone),
           trailing: PopupMenuButton(
               itemBuilder: (context) {
@@ -121,7 +126,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
                             else return Card(child: Text("Empty Contact"));
                           }
                       );
-                    return NullWidget(message: "You haven't had any contacts yet");
+                    else return NullWidget(message: "You haven't had any contacts yet");
                   }
               )
           )
