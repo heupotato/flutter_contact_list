@@ -79,6 +79,7 @@ class ContactDetail extends StatelessWidget {
     colChildren.add(detailInfo("Phone Number", phone, Icons.phone));
     colChildren.addAll(titleObject("Detail"));
     colChildren.addAll(detailList(infoList));
+    colChildren.add(SafeArea(child: SizedBox(height: 20)));
     return Column(
       children: colChildren,
     );
