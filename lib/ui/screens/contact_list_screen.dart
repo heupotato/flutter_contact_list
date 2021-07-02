@@ -69,7 +69,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
     return
       ListTile(
           title: Text(contactName),
-          leading: ContactAvatar(name: contactName),
+          leading: ContactAvatar(name: contactName, index: index),
           subtitle: Text(phone),
           trailing: PopupMenuButton(
               itemBuilder: (context) {
