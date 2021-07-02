@@ -23,13 +23,14 @@ class ContactAdapter extends TypeAdapter<Contact> {
       address: fields[5] as String,
       email: fields[4] as String,
       gender: fields[3] as int,
+      image: fields[6] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Contact obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.firstName)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class ContactAdapter extends TypeAdapter<Contact> {
       ..writeByte(4)
       ..write(obj.email)
       ..writeByte(5)
-      ..write(obj.address);
+      ..write(obj.address)
+      ..writeByte(6)
+      ..write(obj.image);
   }
 
   @override
