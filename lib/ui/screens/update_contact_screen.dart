@@ -166,8 +166,7 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
             description: "Do you want to delete this contact?",
             onConfirm: () {
                 _deleteContact();
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => ContactListScreen())
+                Navigator.of(context).popUntil(ModalRoute.withName('/')
                 );
             }
 

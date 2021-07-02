@@ -26,7 +26,7 @@ class ActionDialog extends StatelessWidget {
     final DialogActionItem confirmAction =
     DialogActionItem(buttonTitle: title, action: onConfirm);
     final DialogActionItem cancel =
-    DialogActionItem(buttonTitle: "Cancel", action:() => Navigator.pop(context));
+    DialogActionItem(buttonTitle: "Cancel", action:() {});
     show(
         context: context,
         dialogTitle: title,
@@ -49,8 +49,8 @@ class ActionDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> buttons = actions.map((e) => TextButton(
         onPressed: (){
+          Navigator.pop(context);
           e.action();
-          //Navigator.pop(context);
         },
         child: Text(e.buttonTitle))
     ).toList();

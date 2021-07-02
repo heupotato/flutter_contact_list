@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/data/contact_data.dart';
 import 'package:flutter_contact_list/storage/repositories/contacts_repositories.dart';
@@ -23,7 +25,13 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
         Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => UpdateContactScreen(id: widget.id))
-        );
+        ).then(_onGoBack);
+    }
+
+    FutureOr _onGoBack(dynamic value){
+      setState(() {
+
+      });
     }
 
     @override
@@ -41,7 +49,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
             body: SingleChildScrollView(
                 child: Column(
                     children: [ContactHeader(contactName: contactName),
-                        ContactDetail(contactInfo: contactInfo,)]
+                        ContactDetail(contactInfo: contactInfo)]
                 )
             )
         );

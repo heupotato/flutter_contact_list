@@ -20,7 +20,11 @@ class MyApp extends StatelessWidget{
       return MaterialApp(
         title: "My contact list",
         theme: ThemeData(primaryColor: Colors.teal[700]),
-        home:  ContactListScreen()
+        initialRoute: '/',
+        routes: {
+          '/': (context) => ContactListScreen()
+        },
+        //home:  ContactListScreen()
         );
     }
 }

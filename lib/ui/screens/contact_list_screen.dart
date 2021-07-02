@@ -26,7 +26,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
   }
 
    _deleteContact(int index){
-      ContactsRepository.deleteContact(index);
+      //ContactsRepository.deleteContact(index);
   }
 
   _manageContact(String action, int index){
@@ -44,7 +44,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
               description: "Do you want to delete this contact?",
               onConfirm: () {
                 _deleteContact(index);
-                Navigator.of(context).pop();
+                //Navigator.of(context).pop();
               }
           );
       }
