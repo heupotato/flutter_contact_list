@@ -19,7 +19,7 @@ class ContactDetailScreen extends StatelessWidget {
             appBar: AppBar(
                 title: Text("Contact Detail")
             ),
-            resizeToAvoidBottomInset: false,
+            resizeToAvoidBottomInset: true,
             body: SingleChildScrollView(
                 child: Column(
                     children: [ContactHeader(contactName: contactName),
