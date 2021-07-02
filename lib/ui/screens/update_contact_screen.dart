@@ -185,13 +185,14 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
             ),
             resizeToAvoidBottomInset: false,
             body: Container(
-                margin: EdgeInsets.all(20),
+                margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
                 child: Form(
                     key: formKey,
                     child: SingleChildScrollView(
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                                SafeArea(child: SizedBox(height: 20)),
                                 firstNameField(oldContact.firstName), SizedBox(height: 20),
                                 lastNameField(oldContact.lastName), SizedBox(height: 20),
                                 phoneNumberField(oldContact.phoneNumber), SizedBox(height: 20),

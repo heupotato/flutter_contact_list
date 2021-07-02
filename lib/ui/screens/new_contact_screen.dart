@@ -150,21 +150,22 @@ class _NewContactScreenState extends State<NewContactScreen> {
             resizeToAvoidBottomInset: true,
             appBar: AppBar(title: Text("Create new contact")),
             body: Container(
-                margin: EdgeInsets.all(20),
+                margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
                 child: Form(
                     key: formKey,
                     child: SingleChildScrollView(
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                firstNameField(), SizedBox(height: 20),
-                                lastNameField(), SizedBox(height: 20),
-                                phoneNumberField(), SizedBox(height: 20),
-                                genderField(), SizedBox(height: 20),
-                                emailField(), SizedBox(height: 20),
-                                addressField(),
-                                SizedBox(height: 50),
-                                CustomElevatedButton(title: "Submit", style: _raisedButtonStyle, onPressed: _onSubmit)
+                                    SafeArea(child: SizedBox(height: 20)),
+                                    firstNameField(), SizedBox(height: 20),
+                                    lastNameField(), SizedBox(height: 20),
+                                    phoneNumberField(), SizedBox(height: 20),
+                                    genderField(), SizedBox(height: 20),
+                                    emailField(), SizedBox(height: 20),
+                                    addressField(),
+                                    SizedBox(height: 50),
+                                    CustomElevatedButton(title: "Submit", style: _raisedButtonStyle, onPressed: _onSubmit)
                             ],
                         )
                     ),
