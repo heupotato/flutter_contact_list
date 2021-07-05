@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter_contact_list/pic/assets.dart';
 import 'package:flutter_contact_list/storage/repositories/contacts_repositories.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -31,7 +31,8 @@ class _AvatarPickerState extends State<AvatarPicker> {
         source: ImageSource.camera, imageQuality: 50);
     if (image == null) return;
 
-    imageCache!.clear();
+    PaintingBinding.instance!.imageCache!.clear();
+    imageCache!.clearLiveImages();
     Directory tempDir = await getApplicationDocumentsDirectory();
     final String path = tempDir.path;
     final File imageFile = File(image.path);
@@ -50,7 +51,8 @@ class _AvatarPickerState extends State<AvatarPicker> {
         source: ImageSource.gallery, imageQuality: 50);
     if (image == null) return;
 
-    imageCache!.clear();
+    PaintingBinding.instance!.imageCache!.clear();
+    imageCache!.clearLiveImages();
     Directory tempDir = await getApplicationDocumentsDirectory();
     final String path = tempDir.path;
     final File imageFile = File(image.path);
@@ -58,6 +60,7 @@ class _AvatarPickerState extends State<AvatarPicker> {
     ContactsRepository.setContactAvatar(widget.index, newImage.path);
     this.setState(() {
       _image = newImage;
+      print(newImage.path);
     });
     Navigator.of(context).pop();
   }
@@ -74,16 +77,16 @@ class _AvatarPickerState extends State<AvatarPicker> {
                       leading: Icon(Icons.photo_library),
                       title: Text("Gallery"),
                       onTap: () {
+                        // Navigator.of(context).pop();
                         _imgFromGallery();
-                        Navigator.of(context).pop();
                       },
                     ),
                     ListTile(
                       leading: Icon(Icons.photo_camera),
                       title: Text("Camera"),
                       onTap: () {
+                        // Navigator.of(context).pop();
                         _imgFromCamera();
-                        Navigator.of(context).pop();
                       },
                     )
                   ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_contact_list/pic/assets.dart';
 import 'package:flutter_contact_list/ui/widgets/avatar_picker_widget.dart';
 
 class ContactHeader extends StatelessWidget {

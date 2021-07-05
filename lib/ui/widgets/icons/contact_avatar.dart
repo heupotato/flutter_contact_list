@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_contact_list/storage/repositories/contacts_repositories.dart';
-import 'package:mdi/mdi.dart';
 
 class ContactAvatar extends StatelessWidget {
   final String name;
@@ -19,7 +18,7 @@ class ContactAvatar extends StatelessWidget {
           ? ClipRRect(
             borderRadius: BorderRadius.circular(40),
             child: Image.file(
-              File(path!),
+              File(path),
               width: 40,
               height: 40,
               fit: BoxFit.fill,
