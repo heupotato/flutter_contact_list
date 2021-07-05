@@ -1,8 +1,8 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:flutter_contact_list/pic/assets.dart';
 import 'package:flutter_contact_list/storage/repositories/contacts_repositories.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -21,10 +21,10 @@ class _AvatarPickerState extends State<AvatarPicker> {
 
   @override
   void initState() {
-    super.initState();
     String? path = ContactsRepository.getContactAvatar(widget.index);
     if (path!= null && path!="")
       _image = File(path);
+    super.initState();
   }
   _imgFromCamera() async {
     final image = await _picker.getImage(
@@ -79,6 +79,8 @@ class _AvatarPickerState extends State<AvatarPicker> {
                       onTap: () {
                         _imgFromGallery();
                         Navigator.of(context).pop();
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => AvatarPicker(index: widget.index)));
                       },
                     ),
                     ListTile(
@@ -87,6 +89,8 @@ class _AvatarPickerState extends State<AvatarPicker> {
                       onTap: () {
                         _imgFromCamera();
                         Navigator.of(context).pop();
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => AvatarPicker(index: widget.index)));
                       },
                     )
                   ],
