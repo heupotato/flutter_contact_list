@@ -26,11 +26,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50ca852b-7e16-4247-8b6b-5f056e9ce1b9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/widgets/contact_detail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/contact_detail.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screens/contact_list_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/contact_list_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,26 +112,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="516" y="247" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1624854235334" />
-    <state x="93" y="93" width="1350" height="638" key="AVDManager" timestamp="1625103945299">
+    <state x="93" y="93" width="1350" height="638" key="AVDManager" timestamp="1625449327483">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1625103945299" />
-    <state width="1493" height="168" key="GridCell.Tab.0.bottom" timestamp="1625103351755">
+    <state x="93" y="93" width="1350" height="638" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1625449327483" />
+    <state width="1493" height="168" key="GridCell.Tab.0.bottom" timestamp="1625449906624">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="168" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1625103351755" />
-    <state width="1493" height="168" key="GridCell.Tab.0.center" timestamp="1625103351755">
+    <state width="1493" height="168" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1625449906624" />
+    <state width="1493" height="168" key="GridCell.Tab.0.center" timestamp="1625449906624">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="168" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1625103351755" />
-    <state width="1493" height="168" key="GridCell.Tab.0.left" timestamp="1625103351755">
+    <state width="1493" height="168" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1625449906624" />
+    <state width="1493" height="168" key="GridCell.Tab.0.left" timestamp="1625449906624">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="168" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1625103351755" />
-    <state width="1493" height="168" key="GridCell.Tab.0.right" timestamp="1625103351755">
+    <state width="1493" height="168" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1625449906624" />
+    <state width="1493" height="168" key="GridCell.Tab.0.right" timestamp="1625449906624">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="168" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1625103351755" />
+    <state width="1493" height="168" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1625449906624" />
     <state x="349" y="155" key="IDE.errors.dialog" timestamp="1624933919779">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -159,6 +156,16 @@
           <url>file://$PROJECT_DIR$/lib/ui/screens/new_contact_screen.dart</url>
           <line>184</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/ui/screens/contact_list_screen.dart</url>
+          <line>144</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/ui/screens/contact_list_screen.dart</url>
+          <line>141</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

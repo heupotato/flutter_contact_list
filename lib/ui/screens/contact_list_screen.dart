@@ -8,6 +8,7 @@ import 'package:flutter_contact_list/ui/screens/update_contact_screen.dart';
 import 'package:flutter_contact_list/ui/widgets/dialog_action_item.dart';
 import 'package:flutter_contact_list/ui/widgets/icons/contact_avatar.dart';
 import 'package:flutter_contact_list/ui/widgets/null_widget.dart';
+import 'package:flutter_contact_list/ui/widgets/search_widget.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class ContactListScreen extends StatefulWidget {
@@ -19,14 +20,17 @@ class ContactListScreen extends StatefulWidget {
 
 class _ContactListScreenState extends State<ContactListScreen> {
 
+  //List<Contact> filteredContactList = [];
+  ValueNotifier <List<Contact>> _filteredContactListNotifier = ValueNotifier(<Contact>[]);
   @override
   void initState() {
+    //filteredContactList = List.from(ContactsRepository.getAllContacts());
+    _filteredContactListNotifier.value = List.from(ContactsRepository.getAllContacts());
     super.initState();
-    //getAllContact();
   }
 
    _deleteContact(int index){
-      //ContactsRepository.deleteContact(index);
+      ContactsRepository.deleteContact(index);
   }
 
   _manageContact(String action, int index){
@@ -37,14 +41,12 @@ class _ContactListScreenState extends State<ContactListScreen> {
           ));
       }
       else if (action == "delete"){
-          //DeleteContact.showDeleteBox(index, context);
           ActionDialog.confirm(
               context: context,
               title: "Delete",
               description: "Do you want to delete this contact?",
               onConfirm: () {
                 _deleteContact(index);
-                //Navigator.of(context).pop();
               }
           );
       }
@@ -95,6 +97,35 @@ class _ContactListScreenState extends State<ContactListScreen> {
     );
   }
 
+  _onChanged(String value){
+      List<Contact> contactList = ContactsRepository.getAllContacts();
+      _filteredContactListNotifier.value = contactList.where((contact)
+          => (contact.firstName.toLowerCase().contains(value.toLowerCase()) ||
+            contact.lastName.toLowerCase().contains(value.toLowerCase()))
+      ).toList();
+      //_filteredContactListNotifier.value = filteredContactList;
+  }
+
+  Expanded searchValueListenableBuilder(List<Contact> filteredList){
+    return Expanded(
+        child: ListView.builder(
+            padding: EdgeInsets.only(left: 5, right: 5),
+            itemCount: filteredList.length,
+            itemBuilder: (context, index) {
+              final Contact ? contact = filteredList[index];
+              if (contact != null){
+                String contactName = contact.firstName + " " +
+                    contact.lastName;
+                String phone = contact.phoneNumber;
+                return Card(
+                  child: contactTile(contactName, phone, index),
+                );
+              }
+              else return Card(child: Text("Empty Contact"));
+            }
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
       return Scaffold(
@@ -105,30 +136,25 @@ class _ContactListScreenState extends State<ContactListScreen> {
                   onPressed: _gotoAddNewContact)
             ],
           ),
-          body: Container(
-              padding: EdgeInsets.all(20),
-              child: ValueListenableBuilder(
+          body: Column(
+              children: [
+                SearchBox(onChanged: _onChanged),
+                ValueListenableBuilder<Box<Contact>>(
                   valueListenable: ContactsRepository.getBox().listenable(),
-                  builder: (context, Box contactsBox, _) {
-                    if (ContactsRepository.getBox().isNotEmpty)
-                      return ListView.builder(
-                          itemCount: contactsBox.length,
-                          itemBuilder: (context, index) {
-                            final Contact ? contact = ContactsRepository.getContactInfo(index);
-                            if (contact != null){
-                              String contactName = contact.firstName + " " +
-                                  contact.lastName;
-                              String phone = contact.phoneNumber;
-                              return Card(
-                                child: contactTile(contactName, phone, index),
-                              );
-                            }
-                            else return Card(child: Text("Empty Contact"));
+                  builder: (context, contactsBox, _) {
+                    if (_filteredContactListNotifier.value.isNotEmpty)
+                      return ValueListenableBuilder<List<Contact>>(
+                          valueListenable: _filteredContactListNotifier,
+                          builder: (context, filteredList, _){
+                            if (filteredList.length > 0)
+                            return searchValueListenableBuilder(filteredList);
+                            return NullWidget(message: "Cannot find any contacts here");
                           }
                       );
-                    else return NullWidget(message: "You haven't had any contacts yet");
+                    else return NullWidget(message: "Cannot find any contacts here");
                   }
               )
+          ]
           )
       );
   }

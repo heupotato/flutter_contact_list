@@ -6,7 +6,7 @@ class ContactsRepository{
 
   static Box<Contact> getBox() => Hive.box<Contact>("contacts");
 
-  static List<Contact>? getAllContacts() => getBox().values.toList();
+  static List<Contact> getAllContacts() => getBox().values.toList();
 
   static Contact? getContactInfo(int index) => getBox().getAt(index);
 
