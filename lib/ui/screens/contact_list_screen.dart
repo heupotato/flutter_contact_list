@@ -20,12 +20,12 @@ class ContactListScreen extends StatefulWidget {
 
 class _ContactListScreenState extends State<ContactListScreen> {
 
-  List<Contact> filteredContactList = [];
-  ValueNotifier <List> _filteredContactListNotifier = ValueNotifier([]);
+  //List<Contact> filteredContactList = [];
+  ValueNotifier <List<Contact>> _filteredContactListNotifier = ValueNotifier(<Contact>[]);
   @override
   void initState() {
-    filteredContactList = List.from(ContactsRepository.getAllContacts());
-    _filteredContactListNotifier.value = filteredContactList;
+    //filteredContactList = List.from(ContactsRepository.getAllContacts());
+    _filteredContactListNotifier.value = List.from(ContactsRepository.getAllContacts());
     super.initState();
   }
 
@@ -99,14 +99,14 @@ class _ContactListScreenState extends State<ContactListScreen> {
 
   _onChanged(String value){
       List<Contact> contactList = ContactsRepository.getAllContacts();
-      filteredContactList = contactList.where((contact)
+      _filteredContactListNotifier.value = contactList.where((contact)
           => (contact.firstName.toLowerCase().contains(value.toLowerCase()) ||
             contact.lastName.toLowerCase().contains(value.toLowerCase()))
       ).toList();
-      _filteredContactListNotifier.value = filteredContactList;
+      //_filteredContactListNotifier.value = filteredContactList;
   }
 
-  Expanded searchValueListenableBuilder(List filteredList){
+  Expanded searchValueListenableBuilder(List<Contact> filteredList){
     return Expanded(
         child: ListView.builder(
             padding: EdgeInsets.only(left: 5, right: 5),
@@ -142,10 +142,10 @@ class _ContactListScreenState extends State<ContactListScreen> {
                 ValueListenableBuilder(
                   valueListenable: ContactsRepository.getBox().listenable(),
                   builder: (context, Box contactsBox, _) {
-                    if (filteredContactList.isNotEmpty)
+                    if (_filteredContactListNotifier.value.isNotEmpty)
                       return ValueListenableBuilder(
                           valueListenable: _filteredContactListNotifier,
-                          builder: (context, List filteredList, _){
+                          builder: (context, List <Contact> filteredList, _){
                             if (filteredList.length > 0)
                             return searchValueListenableBuilder(filteredList);
                             return NullWidget(message: "Cannot find any contacts here");
