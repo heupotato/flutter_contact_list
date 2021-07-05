@@ -21,12 +21,12 @@ class ContactListScreen extends StatefulWidget {
 class _ContactListScreenState extends State<ContactListScreen> {
 
   List<Contact> filteredContactList = [];
+  ValueNotifier <List> _filteredContactListNotifier = ValueNotifier([]);
   @override
   void initState() {
+    filteredContactList = List.from(ContactsRepository.getAllContacts());
+    _filteredContactListNotifier.value = filteredContactList;
     super.initState();
-    setState(() {
-      filteredContactList = List.from(ContactsRepository.getAllContacts());
-    });
   }
 
    _deleteContact(int index){
@@ -98,14 +98,34 @@ class _ContactListScreenState extends State<ContactListScreen> {
   }
 
   _onChanged(String value){
-    setState(() {
       List<Contact> contactList = ContactsRepository.getAllContacts();
       filteredContactList = contactList.where((contact)
           => (contact.firstName.toLowerCase().contains(value.toLowerCase()) ||
             contact.lastName.toLowerCase().contains(value.toLowerCase()))
       ).toList();
-    });
+      _filteredContactListNotifier.value = filteredContactList;
   }
+
+  Expanded searchValueListenableBuilder(List filteredList){
+    return Expanded(
+        child: ListView.builder(
+            padding: EdgeInsets.only(left: 5, right: 5),
+            itemCount: filteredList.length,
+            itemBuilder: (context, index) {
+              final Contact ? contact = filteredList[index];
+              if (contact != null){
+                String contactName = contact.firstName + " " +
+                    contact.lastName;
+                String phone = contact.phoneNumber;
+                return Card(
+                  child: contactTile(contactName, phone, index),
+                );
+              }
+              else return Card(child: Text("Empty Contact"));
+            }
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
       return Scaffold(
@@ -123,23 +143,14 @@ class _ContactListScreenState extends State<ContactListScreen> {
                   valueListenable: ContactsRepository.getBox().listenable(),
                   builder: (context, Box contactsBox, _) {
                     if (filteredContactList.isNotEmpty)
-                      return Expanded(
-                          child: ListView.builder(
-                            padding: EdgeInsets.only(left: 5, right: 5),
-                            itemCount: filteredContactList.length,
-                            itemBuilder: (context, index) {
-                              final Contact ? contact = filteredContactList[index];
-                              if (contact != null){
-                                String contactName = contact.firstName + " " +
-                                    contact.lastName;
-                                String phone = contact.phoneNumber;
-                                return Card(
-                                  child: contactTile(contactName, phone, index),
-                                );
-                              }
-                              else return Card(child: Text("Empty Contact"));
-                            }
-                      ));
+                      return ValueListenableBuilder(
+                          valueListenable: _filteredContactListNotifier,
+                          builder: (context, List filteredList, _){
+                            if (filteredList.length > 0)
+                            return searchValueListenableBuilder(filteredList);
+                            return NullWidget(message: "Cannot find any contacts here");
+                          }
+                      );
                     else return NullWidget(message: "Cannot find any contacts here");
                   }
               )
