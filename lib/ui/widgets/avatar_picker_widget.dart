@@ -64,6 +64,12 @@ class _AvatarPickerState extends State<AvatarPicker> {
     Navigator.of(context).pop();
   }
 
+  _refresh(){
+    Navigator.of(context).pop();
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => AvatarPicker(index: widget.index)));
+  }
+
   void _showPicker (context){
     showModalBottomSheet(
         context: context,
@@ -77,9 +83,7 @@ class _AvatarPickerState extends State<AvatarPicker> {
                       title: Text("Gallery"),
                       onTap: () {
                         _imgFromGallery();
-                        Navigator.of(context).pop();
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => AvatarPicker(index: widget.index)));
+                        _refresh();
                       },
                     ),
                     ListTile(
@@ -87,9 +91,7 @@ class _AvatarPickerState extends State<AvatarPicker> {
                       title: Text("Camera"),
                       onTap: () {
                         _imgFromCamera();
-                        Navigator.of(context).pop();
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => AvatarPicker(index: widget.index)));
+                        _refresh();
                       },
                     )
                   ],
