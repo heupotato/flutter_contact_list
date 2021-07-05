@@ -25,12 +25,12 @@ class _ContactListScreenState extends State<ContactListScreen> {
   void initState() {
     super.initState();
     setState(() {
-      //contactList = ContactsRepository.getAllContacts()!;
+      filteredContactList = List.from(ContactsRepository.getAllContacts());
     });
   }
 
    _deleteContact(int index){
-      //ContactsRepository.deleteContact(index);
+      ContactsRepository.deleteContact(index);
   }
 
   _manageContact(String action, int index){
@@ -41,14 +41,12 @@ class _ContactListScreenState extends State<ContactListScreen> {
           ));
       }
       else if (action == "delete"){
-          //DeleteContact.showDeleteBox(index, context);
           ActionDialog.confirm(
               context: context,
               title: "Delete",
               description: "Do you want to delete this contact?",
               onConfirm: () {
                 _deleteContact(index);
-                //Navigator.of(context).pop();
               }
           );
       }
@@ -101,7 +99,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
 
   _onChanged(String value){
     setState(() {
-      List<Contact> contactList = ContactsRepository.getAllContacts()!;
+      List<Contact> contactList = ContactsRepository.getAllContacts();
       filteredContactList = contactList.where((contact)
           => (contact.firstName.toLowerCase().contains(value.toLowerCase()) ||
             contact.lastName.toLowerCase().contains(value.toLowerCase()))
