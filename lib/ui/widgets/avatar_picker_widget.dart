@@ -77,16 +77,16 @@ class _AvatarPickerState extends State<AvatarPicker> {
                       leading: Icon(Icons.photo_library),
                       title: Text("Gallery"),
                       onTap: () {
-                        // Navigator.of(context).pop();
                         _imgFromGallery();
+                        Navigator.of(context).pop();
                       },
                     ),
                     ListTile(
                       leading: Icon(Icons.photo_camera),
                       title: Text("Camera"),
                       onTap: () {
-                        // Navigator.of(context).pop();
                         _imgFromCamera();
+                        Navigator.of(context).pop();
                       },
                     )
                   ],
