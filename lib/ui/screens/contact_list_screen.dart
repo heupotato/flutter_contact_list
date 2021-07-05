@@ -139,13 +139,13 @@ class _ContactListScreenState extends State<ContactListScreen> {
           body: Column(
               children: [
                 SearchBox(onChanged: _onChanged),
-                ValueListenableBuilder(
+                ValueListenableBuilder<Box<Contact>>(
                   valueListenable: ContactsRepository.getBox().listenable(),
-                  builder: (context, Box contactsBox, _) {
+                  builder: (context, contactsBox, _) {
                     if (_filteredContactListNotifier.value.isNotEmpty)
-                      return ValueListenableBuilder(
+                      return ValueListenableBuilder<List<Contact>>(
                           valueListenable: _filteredContactListNotifier,
-                          builder: (context, List <Contact> filteredList, _){
+                          builder: (context, filteredList, _){
                             if (filteredList.length > 0)
                             return searchValueListenableBuilder(filteredList);
                             return NullWidget(message: "Cannot find any contacts here");
