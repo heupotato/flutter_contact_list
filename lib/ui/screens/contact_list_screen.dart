@@ -69,7 +69,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
     return
       ListTile(
           title: Text(contactName),
-          leading: ContactAvatar(name: contactName),
+          leading: ContactAvatar(name: contactName, index: index),
           subtitle: Text(phone),
           trailing: PopupMenuButton(
               itemBuilder: (context) {
@@ -142,6 +142,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
                 ValueListenableBuilder<Box<Contact>>(
                   valueListenable: ContactsRepository.getBox().listenable(),
                   builder: (context, contactsBox, _) {
+                    _filteredContactListNotifier.value = ContactsRepository.getAllContacts();
                     if (_filteredContactListNotifier.value.isNotEmpty)
                       return ValueListenableBuilder<List<Contact>>(
                           valueListenable: _filteredContactListNotifier,

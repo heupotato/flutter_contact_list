@@ -21,7 +21,10 @@ class Contact{
   @HiveField(5)
   String address;
 
+  @HiveField(6)
+  String image;
+
   Contact({required this.firstName, required this.lastName, required this.phoneNumber,
-    this.address = "", this.email ="", this.gender = 0});
+    this.address = "", this.email ="", this.gender = 0, this.image = ""});
 
 }

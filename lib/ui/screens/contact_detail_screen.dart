@@ -48,8 +48,8 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
             resizeToAvoidBottomInset: true,
             body: SingleChildScrollView(
                 child: Column(
-                    children: [ContactHeader(contactName: contactName),
-                        ContactDetail(contactInfo: contactInfo)]
+                    children: [ContactHeader(contactName: contactName, index: widget.id),
+                        ContactDetail(contactInfo: contactInfo,)]
                 )
             )
         );
